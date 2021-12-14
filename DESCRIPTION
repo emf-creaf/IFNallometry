@@ -1,0 +1,17 @@
+Package: IFNallometry
+Type: Package
+Title: IFN volume and biomass allometry models
+Version: 0.0.1
+Date: 2021-12-14  
+Authors@R: c(
+	person('Miquel', 'De Caceres', role=c('aut','cre'),
+	email='miquelcaceres@gmail.com'))
+Description: Routines for calculating volume and biomass for Spanish Forest Inventory (IFN) plots.
+License: GPL (>= 2)
+Encoding: UTF-8
+Depends: R (>= 3.5.0)
+Imports: tidyr, dplyr
+Suggests: knitr, rmarkdown
+LazyData: true
+RoxygenNote: 7.1.2
+VignetteBuilder: utils, knitr
