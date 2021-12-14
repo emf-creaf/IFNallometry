@@ -1,4 +1,4 @@
-#' Volumetric models
+#' Volume allometry models
 #'
 #' Static models for the wood volume (VCC, VSC, VLE & IAVC) by species and province in the IFN
 #'

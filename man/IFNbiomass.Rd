@@ -2,7 +2,7 @@
 % Please edit documentation in R/IFNbiomass.R
 \name{IFNbiomass}
 \alias{IFNbiomass}
-\title{Biomass models}
+\title{Biomass allometry models}
 \usage{
 IFNbiomass(x, as.CO2 = FALSE, area = NA, DBHclasses = NULL, verbose = FALSE)
 }

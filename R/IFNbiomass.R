@@ -1,4 +1,4 @@
-#' Biomass models
+#' Biomass allometry models
 #'
 #' Static models for the biomass (kg/ha) of stem, roots, branches, leaves/needles and bark of species in the IFN
 #'

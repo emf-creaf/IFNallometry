@@ -2,7 +2,7 @@
 % Please edit documentation in R/IFNvolume.R
 \name{IFNvolume}
 \alias{IFNvolume}
-\title{Volumetric models}
+\title{Volume allometry models}
 \usage{
 IFNvolume(
   x,
