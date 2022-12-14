@@ -54,7 +54,7 @@
 #' IFNvolume(exampleTreeData)
 #'
 #' # Groups the result by DBH clases
-#' IFNvolume(exampleTreeData,
+#' IFNvolume(exampleTreeData, provinceFromID = TRUE,
 #'           DBHclasses = seq(0, 120, by=5))
 IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
                     provinceFromID = FALSE, DBHclasses = NULL,

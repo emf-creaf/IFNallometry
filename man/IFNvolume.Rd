@@ -78,6 +78,6 @@ data(exampleTreeData)
 IFNvolume(exampleTreeData)
 
 # Groups the result by DBH clases
-IFNvolume(exampleTreeData,
+IFNvolume(exampleTreeData, provinceFromID = TRUE,
           DBHclasses = seq(0, 120, by=5))
 }

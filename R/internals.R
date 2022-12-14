@@ -179,14 +179,20 @@
   stop(paste("Wrong parameter 'model' ", model))
 }
 .getVolumeParams<-function(ifn, prov, sp, param, fc, code_missing = "99") {
-  sel = (volume_parameters$IFN %in% ifn) & (volume_parameters$Province==prov) & (volume_parameters$PARAM==param) & (volume_parameters$FC==fc)
+  # Select IFN, parameter and FC
+  sel = (volume_parameters$IFN %in% ifn) & (volume_parameters$PARAM==param) & (volume_parameters$FC==fc)
   sel[is.na(sel)] = FALSE
   df = volume_parameters[sel,]
-  if(nrow(df)>0) { # select species
+  if(nrow(df)>0) { # select province species
     sel = rep(FALSE, nrow(df))
     spp_s = strsplit(as.character(df$ID_TAXON), split=",")
     for(i in 1:length(spp_s)) if(as.character(sp) %in% spp_s[[i]]) sel[i] = TRUE
-    if(sum(sel)==0) sel[df$ID_TAXON==code_missing] = TRUE #Set otras frondosas (code = "99") to true
+    if(sum(sel)==0) {
+      sel[(df$Province==prov) & (df$ID_TAXON==code_missing)] = TRUE #Set otras frondosas (code = "99") to true
+    } else {
+      sel2 = sel & (df$Province==prov) # add province filter if possible (otherwise first province will be used)
+      if(sum(sel2)>0) sel = sel2
+    }
     return(df[sel,])
   }
   return(df)
