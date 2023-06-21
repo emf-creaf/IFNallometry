@@ -54,7 +54,7 @@ Additionally, the data frame may include a column 'FC' that specifies the cubic 
 If \code{DBHclasses = NULL}, a data frame with as many rows as tree records in \code{x} and columns:
 \itemize{
   \item{\code{ID}: Plot identifier}
-  \item{\code{Species}: Species code}
+  \item{\code{Species}: Species code or species name}
   \item{\code{Name}: Species name}
   \item{\code{FC}: Cubic content form used to calculate volume.}
   \item{\code{VCC}: Volumen con corteza (m3/ha).}

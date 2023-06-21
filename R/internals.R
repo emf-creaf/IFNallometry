@@ -180,13 +180,18 @@
 }
 .getVolumeParams<-function(ifn, prov, sp, param, fc, code_missing = "99") {
   # Select IFN, parameter and FC
-  sel = (volume_parameters$IFN %in% ifn) & (volume_parameters$PARAM==param) & (volume_parameters$FC==fc)
+  sel <- (volume_parameters$IFN %in% ifn) & (volume_parameters$PARAM==param) & (volume_parameters$FC==fc)
   sel[is.na(sel)] = FALSE
-  df = volume_parameters[sel,]
+  df <- volume_parameters[sel,]
   if(nrow(df)>0) { # select province species
-    sel = rep(FALSE, nrow(df))
-    spp_s = strsplit(as.character(df$ID_TAXON), split=",")
-    for(i in 1:length(spp_s)) if(as.character(sp) %in% spp_s[[i]]) sel[i] = TRUE
+    sel <- rep(FALSE, nrow(df))
+    if(is.numeric(sp)) {
+      code_s <- strsplit(as.character(df$ID_TAXON), split=",")
+      for(i in 1:length(code_s)) if(as.character(sp) %in% code_s[[i]]) sel[i] <- TRUE
+    } else {
+      spname_s = strsplit(as.character(df$Species), split=",")
+      for(i in 1:length(spname_s)) if(as.character(sp) %in% spname_s[[i]]) sel[i] <- TRUE
+    }
     if(sum(sel)==0) {
       sel[(df$Province==prov) & (df$ID_TAXON==code_missing)] = TRUE #Set otras frondosas (code = "99") to true
     } else {

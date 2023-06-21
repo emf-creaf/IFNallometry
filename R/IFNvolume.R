@@ -34,7 +34,7 @@
 #' @return If \code{DBHclasses = NULL}, a data frame with as many rows as tree records in \code{x} and columns:
 #' \itemize{
 #'   \item{\code{ID}: Plot identifier}
-#'   \item{\code{Species}: Species code}
+#'   \item{\code{Species}: Species code or species name}
 #'   \item{\code{Name}: Species name}
 #'   \item{\code{FC}: Cubic content form used to calculate volume.}
 #'   \item{\code{VCC}: Volumen con corteza (m3/ha).}
@@ -93,7 +93,8 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
     if(verbose) setTxtProgressBar(pb, i)
     s = strsplit(un_prov_tax_fc[i],"_")[[1]]
     provincei = as.numeric(s[1])
-    taxoni =  as.numeric(s[2])
+    taxoni <- s[2]
+    if(nchar(taxoni)<=4) taxoni <- as.numeric(taxoni)
     sel = (prov_tax_fc==un_prov_tax_fc[i])
 
     # print(provincei)
