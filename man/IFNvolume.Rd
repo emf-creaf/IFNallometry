@@ -75,6 +75,12 @@ the function iterates over the values of 'FC' until an equation is available.
 \examples{
 data(exampleTreeData)
 
+
+# Define province from first characters of ID
+exampleTreeData <- exampleTreeData |>
+   dplyr::mutate(Province = substr(ID, 1, nchar(ID)-4))
+
+# Calculate volume
 IFNvolume(exampleTreeData)
 
 # Groups the result by DBH clases
