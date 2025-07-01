@@ -52,11 +52,14 @@
 #' data(exampleTreeData)
 #'
 #'
+#' # Calculate volume using plot ID to extract province
+#' IFNvolume(exampleTreeData, provinceFromID = TRUE)
+#'
 #' # Define province from first characters of ID
 #' exampleTreeData <- exampleTreeData |>
 #'    dplyr::mutate(Province = substr(ID, 1, nchar(ID)-4))
 #'
-#' # Calculate volume
+#' # Calculate volume (requires column 'province' or 'Province')
 #' IFNvolume(exampleTreeData)
 #'
 #' # Groups the result by DBH clases
@@ -152,4 +155,41 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
 
   }
   return(df)
+}
+
+
+#' Wrapper volume function for packages medfate and medfateland
+#'
+#' Wrapper function to be used to calculate timber volumes with packages medfate and medfateland.
+#'
+#' @param x Data frame of tree data or \code{forest} object from package medfate.
+#' @param SpParams Data frame of species parameters suitable for medfate package (not used).
+#' @param province Spanish province code.
+#' @param min_dbh Minimum diameter at breast height (in cm) for timber estimation.
+#'
+#' @returns A vector of timber volumes per tree cohort (in m3/ha) to be used in medfateland simulations.
+#'
+#' @details Values for parameters \code{x} and \code{SpParams} will be supplied by the simulation function (e.g. \code{fordyn_scenario}) during calculations. Values for parameters
+#' \code{province} and \code{min_dbh} should be supplied using as a list to parameter \code{volume_arguments}. See documentation of package medfateland.
+#'
+#' @export
+IFNvolume_medfate<-function(x, SpParams,
+                            province,
+                            min_dbh = 7.5){
+  if(inherits(x, "forest")) x <- x$treeData
+  ntree <- nrow(x)
+  if(ntree>0) {
+    y <- data.frame(ID = rep("XX", ntree),
+                    Province = rep(province, ntree),
+                    Species = x$Species,
+                    DBH = x$DBH,
+                    H = x$Height/100, # Height is in cm in medfate
+                    N = x$N
+    )
+    vol <- IFNallometry::IFNvolume(y)
+    vcc <- pmax(0,vol$VCC)
+    vcc[x$DBH < min_dbh] <- 0
+    return(vcc) #m3/ha
+  }
+  return(numeric(0))
 }

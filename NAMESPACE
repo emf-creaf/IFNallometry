@@ -1,4 +1,4 @@
-export("IFNbiomass", "IFNvolume")
+export("IFNbiomass", "IFNvolume", "IFNvolume_medfate")
 importFrom("tidyr", "%>%")
 importFrom("dplyr", "group_by", "summarize", "summarize_at", "distinct", "bind_rows")
 importFrom("tibble","add_column")
