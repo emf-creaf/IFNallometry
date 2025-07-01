@@ -12,8 +12,8 @@
 #'   \item{\code{H}: Tree height (m)}
 #' }
 #'
-#' @name exampleTreeData
-#' @aliases exampleTreeData
+#' @name example_tree_data
+#' @aliases example_tree_data
 #' @docType data
 #' @author Miquel De Cáceres
 #' @keywords data

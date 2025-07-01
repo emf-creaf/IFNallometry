@@ -62,21 +62,21 @@
 #' @seealso \code{\link{IFNbiomass}} \code{\link{IFNvolume_medfate}}
 #' @export
 #' @examples
-#' data(exampleTreeData)
+#' data(example_tree_data)
 #'
 #'
 #' # Calculate volume using plot ID to extract province
-#' IFNvolume(exampleTreeData, provinceFromID = TRUE)
+#' IFNvolume(example_tree_data, provinceFromID = TRUE)
 #'
 #' # Define province from first characters of ID
-#' exampleTreeData <- exampleTreeData |>
+#' example_tree_data <- example_tree_data |>
 #'    dplyr::mutate(Province = substr(ID, 1, nchar(ID)-4))
 #'
 #' # Calculate volume (requires column 'province' or 'Province')
-#' IFNvolume(exampleTreeData)
+#' IFNvolume(example_tree_data)
 #'
 #' # Groups the result by DBH clases
-#' IFNvolume(exampleTreeData, provinceFromID = TRUE,
+#' IFNvolume(example_tree_data, provinceFromID = TRUE,
 #'           DBHclasses = seq(0, 120, by=5))
 IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
                     provinceFromID = FALSE, DBHclasses = NULL,

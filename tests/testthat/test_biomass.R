@@ -1,20 +1,20 @@
-data(exampleTreeData)
+data(example_tree_data)
 test_that("biomass can be calculated",{
-  expect_s3_class(IFNbiomass(exampleTreeData, as.CO2 = TRUE), "data.frame")
-  expect_s3_class(IFNbiomass(exampleTreeData, as.CO2 = FALSE), "data.frame")
-  expect_s3_class(IFNbiomass(exampleTreeData, as.CO2 = TRUE,
+  expect_s3_class(IFNbiomass(example_tree_data, as.CO2 = TRUE), "data.frame")
+  expect_s3_class(IFNbiomass(example_tree_data, as.CO2 = FALSE), "data.frame")
+  expect_s3_class(IFNbiomass(example_tree_data, as.CO2 = TRUE,
                              DBHclasses = seq(0, 120, by=5)), "data.frame")
-  expect_s3_class(IFNbiomass(exampleTreeData, as.CO2 = FALSE,
+  expect_s3_class(IFNbiomass(example_tree_data, as.CO2 = FALSE,
                              DBHclasses = seq(0, 120, by=5)), "data.frame")
 })
 
 test_that("biomass can be calculated from species names",{
-  v <- IFNbiomass(exampleTreeData)
-  exampleTreeData2 <- exampleTreeData
-  exampleTreeData2$Species <- v$Name
-  exampleTreeData2$Species[18] <- "Acer spp."
-  expect_s3_class(IFNbiomass(exampleTreeData2), "data.frame")
-  expect_s3_class(IFNbiomass(exampleTreeData2), "data.frame")
+  v <- IFNbiomass(example_tree_data)
+  example_tree_data2 <- example_tree_data
+  example_tree_data2$Species <- v$Name
+  example_tree_data2$Species[18] <- "Acer spp."
+  expect_s3_class(IFNbiomass(example_tree_data2), "data.frame")
+  expect_s3_class(IFNbiomass(example_tree_data2), "data.frame")
 })
 test_that("biomass can be calculated for medfate",{
   testthat::skip_if_not_installed("medfate")

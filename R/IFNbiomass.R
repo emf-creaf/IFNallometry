@@ -42,12 +42,12 @@
 #' @seealso \code{\link{IFNvolume}}
 #' @export
 #' @examples
-#' data(exampleTreeData)
+#' data(example_tree_data)
 #'
-#' IFNbiomass(exampleTreeData)
+#' IFNbiomass(example_tree_data)
 #'
 #' # Groups the result by DBH clases
-#' IFNbiomass(exampleTreeData,
+#' IFNbiomass(example_tree_data,
 #'            DBHclasses = seq(0, 120, by=5))
 IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
                      DBHclasses = NULL, verbose = FALSE) {

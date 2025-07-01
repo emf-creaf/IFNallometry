@@ -41,12 +41,12 @@ Biomass of branches is the result of adding the result of equations calibrated f
 When species are provided as character names, both exact matching and function \code{\link{startsWith}} are used.
 }
 \examples{
-data(exampleTreeData)
+data(example_tree_data)
 
-IFNbiomass(exampleTreeData)
+IFNbiomass(example_tree_data)
 
 # Groups the result by DBH clases
-IFNbiomass(exampleTreeData,
+IFNbiomass(example_tree_data,
            DBHclasses = seq(0, 120, by=5))
 }
 \references{

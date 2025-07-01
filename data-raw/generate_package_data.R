@@ -2,8 +2,8 @@
 # dir_IFN = "~/OneDrive/EMF_datasets/ForestInventories/IFN"
 # plotCodes = c("80001", "80002", "81073")
 # treeDataIFN2 = IFNread::readPiesMayoresIFN2(prov = "08", DBFdir = paste0(dir_IFN,"/Sources/IFN2/DBF"), subsetVars=TRUE)
-# exampleTreeData = treeDataIFN2[treeDataIFN2$ID %in% plotCodes, c("ID", "Species", "N", "DBH", "H")]
-# usethis::use_data(exampleTreeData, overwrite = TRUE)
+# example_tree_data = treeDataIFN2[treeDataIFN2$ID %in% plotCodes, c("ID", "Species", "N", "DBH", "H")]
+# usethis::use_data(example_tree_data, overwrite = TRUE)
 
 # Provinces
 df <- as.data.frame(readxl::read_xls("data-raw/ProvinciasCCAA.xls"))

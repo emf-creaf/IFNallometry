@@ -36,21 +36,21 @@ Here is an example data set of forest plot input to the package:
 
 ```{r example}
 library(IFNallometry)
-data("exampleTreeData")
-head(exampleTreeData)
+data("example_tree_data")
+head(example_tree_data)
 ```
 
 Below is the code and result of calculating timber volumes, using plot ID to extract the Spanish province:
 
 ```{r}
-example_volumes <- IFNvolume(exampleTreeData, provinceFromID = TRUE)
+example_volumes <- IFNvolume(example_tree_data, provinceFromID = TRUE)
 head(example_volumes)
 ```
 
 And here is the code and result of calculating biomass components:
 
 ```{r}
-example_biomass <- IFNbiomass(exampleTreeData)
+example_biomass <- IFNbiomass(example_tree_data)
 head(example_biomass)
 ```
 
