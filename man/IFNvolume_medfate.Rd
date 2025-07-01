@@ -25,7 +25,14 @@ Wrapper function to be used to calculate timber volumes with packages medfate an
 }
 \details{
 Values for parameters \code{x} and \code{SpParams} will be supplied by the simulation function (e.g. \code{fordyn_scenario}) during calculations. Values for parameters
-\code{province} and \code{min_dbh} should be supplied using as a list to parameter \code{volume_arguments}. See documentation of package medfateland.
+\code{province}, \code{min_dbh} and \code{level} should be supplied using as a list to parameter \code{volume_arguments}. See documentation of package medfateland.
+}
+\examples{
+if(require("medfate")) {
+  IFNvolume_medfate(exampleforest, SpParamsMED,
+                    province = "8")
+}
+
 }
 \seealso{
 \code{\link{IFNvolume}}

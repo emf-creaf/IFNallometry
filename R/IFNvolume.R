@@ -197,10 +197,16 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
 #' @returns A vector of timber volumes per tree cohort (in m3/ha) to be used in medfateland simulations.
 #'
 #' @details Values for parameters \code{x} and \code{SpParams} will be supplied by the simulation function (e.g. \code{fordyn_scenario}) during calculations. Values for parameters
-#' \code{province} and \code{min_dbh} should be supplied using as a list to parameter \code{volume_arguments}. See documentation of package medfateland.
+#' \code{province}, \code{min_dbh} and \code{level} should be supplied using as a list to parameter \code{volume_arguments}. See documentation of package medfateland.
 #'
 #' @seealso \code{\link{IFNvolume}}
 #' @export
+#' @examples
+#' if(require("medfate")) {
+#'   IFNvolume_medfate(exampleforest, SpParamsMED,
+#'                     province = "8")
+#' }
+#'
 IFNvolume_medfate<-function(x, SpParams,
                             province,
                             min_dbh = 7.5,

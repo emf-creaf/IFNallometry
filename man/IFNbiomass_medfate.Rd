@@ -33,6 +33,14 @@ Wrapper function to be used to calculate tree biomass for packages medfate and m
 Values for parameter \code{x} will be supplied by the calling function (e.g. \code{modify_forest_structure}). Values for parameters
 \code{area}, \code{fraction} and \code{level} (if they defaults need to be changed) should be supplied using as a list to parameter \code{biomass_arguments}.
 }
+\examples{
+if(require("medfate")) {
+  IFNbiomass_medfate(exampleforest, SpParamsMED,
+                     fraction = "aboveground",
+                     level = "stand")
+}
+
+}
 \seealso{
 \code{\link{IFNbiomass}}
 }

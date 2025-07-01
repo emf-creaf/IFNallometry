@@ -214,6 +214,13 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
 #'
 #' @seealso \code{\link{IFNbiomass}}
 #' @export
+#' @examples
+#' if(require("medfate")) {
+#'   IFNbiomass_medfate(exampleforest, SpParamsMED,
+#'                      fraction = "aboveground",
+#'                      level = "stand")
+#' }
+#'
 IFNbiomass_medfate<-function(x, SpParams,
                              area = NA,
                              fraction = "total",
