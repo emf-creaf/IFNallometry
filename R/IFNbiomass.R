@@ -205,7 +205,7 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
 #' @param SpParams Data frame of species parameters suitable for medfate package (not used).
 #' @param area Either 'Atlantic' or 'Mediterranean' to specify allometric equations specific to the area (for Pinus pinaster)
 #' @param fraction A string, either "total" (for total biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).
-#' @param level A string, either "cohort" (for tree cohort biomass) or "stand" (for stand-level biomass).
+#' @param level A string, either "cohort" (for tree cohort-level biomass) or "stand" (for stand-level biomass).
 #'
 #' @returns A vector of biomass of each tree cohort (in Mg/ha of dry weight) to be used in medfate or medfateland packages.
 #'

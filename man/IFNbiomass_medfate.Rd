@@ -21,7 +21,7 @@ IFNbiomass_medfate(
 
 \item{fraction}{A string, either "total" (for total biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).}
 
-\item{level}{A string, either "cohort" (for tree cohort biomass) or "stand" (for stand-level biomass).}
+\item{level}{A string, either "cohort" (for tree cohort-level biomass) or "stand" (for stand-level biomass).}
 }
 \value{
 A vector of biomass of each tree cohort (in Mg/ha of dry weight) to be used in medfate or medfateland packages.

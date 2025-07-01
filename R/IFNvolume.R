@@ -184,7 +184,7 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
 }
 
 
-#' Wrapper volume function for packages medfate and medfateland
+#' Wrapper tree volume function for packages medfate and medfateland
 #'
 #' Wrapper function to be used to calculate timber volumes with packages medfate and medfateland.
 #'
@@ -192,7 +192,7 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
 #' @param SpParams Data frame of species parameters suitable for medfate package (not used).
 #' @param province Spanish province code.
 #' @param min_dbh Minimum diameter at breast height (in cm) for timber estimation.
-#' @param level A string, either "cohort" (for tree cohort volume) or "stand" (for stand-level volume).
+#' @param level A string, either "cohort" (for tree cohort-level volume) or "stand" (for stand-level volume).
 #'
 #' @returns A vector of timber volumes per tree cohort (in m3/ha) to be used in medfateland simulations.
 #'

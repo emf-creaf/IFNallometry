@@ -2,7 +2,7 @@
 % Please edit documentation in R/IFNvolume.R
 \name{IFNvolume_medfate}
 \alias{IFNvolume_medfate}
-\title{Wrapper volume function for packages medfate and medfateland}
+\title{Wrapper tree volume function for packages medfate and medfateland}
 \usage{
 IFNvolume_medfate(x, SpParams, province, min_dbh = 7.5, level = "cohort")
 }
@@ -15,7 +15,7 @@ IFNvolume_medfate(x, SpParams, province, min_dbh = 7.5, level = "cohort")
 
 \item{min_dbh}{Minimum diameter at breast height (in cm) for timber estimation.}
 
-\item{level}{A string, either "cohort" (for tree cohort volume) or "stand" (for stand-level volume).}
+\item{level}{A string, either "cohort" (for tree cohort-level volume) or "stand" (for stand-level volume).}
 }
 \value{
 A vector of timber volumes per tree cohort (in m3/ha) to be used in medfateland simulations.
