@@ -30,6 +30,8 @@
 #' Ruiz-Peinado, R., M. Rio, and G. Montero (2011) New models for estimating the carbon sink capacity of Spanish. Forest Systems 20:176–188.
 #'
 #' Ruiz-Peinado, R., G. Montero, and M. Del Rio (2012) Biomass models to estimate carbon stocks for hardwood tree species. Forest Systems 21:42.
+#'
+#' @export
 #' @examples
 #' data(exampleTreeData)
 #'
@@ -38,7 +40,6 @@
 #' # Groups the result by DBH clases
 #' IFNbiomass(exampleTreeData,
 #'            DBHclasses = seq(0, 120, by=5))
-#'
 IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
                      DBHclasses = NULL, verbose = FALSE) {
   Species = x$Species
@@ -55,10 +56,10 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
   sp_unique = unique(Species)
   nu = length(sp_unique)
   if(verbose) {
-    pb = txtProgressBar(1, nu, style=3)
+    cli::cli_progress_bar("Species", total = nu)
   }
   for(i in 1:nu) {
-    if(verbose) setTxtProgressBar(pb, i)
+    if(verbose) cli::cli_progress_update()
     spu = sp_unique[i]
     sel = (Species==spu)
     # cat(paste("Taxon",spu," #", sum(sel)))

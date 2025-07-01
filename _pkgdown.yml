@@ -1,0 +1,9 @@
+url: https://emf-creaf.github.io/IFNallometry/
+
+template:
+  bootstrap: 5
+  bslib:
+    bootswatch: materia
+    pkgdown-nav-height: 100px
+    primary: "#241F1C"
+

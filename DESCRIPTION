@@ -8,6 +8,7 @@ Authors@R: c(
 	email='miquelcaceres@gmail.com'))
 Description: Routines for calculating volume and biomass for Spanish Forest Inventory (IFN) plots.
 License: GPL (>= 2)
+URL: https://emf-creaf.github.io/IFNallometry/
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
 Imports: tidyr, dplyr, tibble

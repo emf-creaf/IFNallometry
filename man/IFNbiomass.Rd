@@ -40,7 +40,6 @@ IFNbiomass(exampleTreeData)
 # Groups the result by DBH clases
 IFNbiomass(exampleTreeData,
            DBHclasses = seq(0, 120, by=5))
-
 }
 \references{
 Diéguez-Aranda, U., A. Rojo Alboreca, F. Castedo-Dorado, J. G. Álvarez González, M. Barrio-Anta, F. Crecente-Campo, J. M. González González, C. Pérez-Cruzado, R. Rodríguez Soalleiro, C. A. López-Sánchez, M. Á. Balboa-Murias, J. J. Gorgoso Varela, and F. Sánchez Rodríguez (2009) Herramientas selvícolas para la gestión forestal sostenible en Galicia. Dirección Xeral de Montes, Consellería do Medio Rural, Xunta de Galicia.
