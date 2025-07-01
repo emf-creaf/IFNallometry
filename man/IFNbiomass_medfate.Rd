@@ -4,14 +4,24 @@
 \alias{IFNbiomass_medfate}
 \title{Wrapper biomass function for packages medfate and medfateland}
 \usage{
-IFNbiomass_medfate(x, area = NA, fraction = "aerial")
+IFNbiomass_medfate(
+  x,
+  SpParams,
+  area = NA,
+  fraction = "total",
+  level = "cohort"
+)
 }
 \arguments{
 \item{x}{Data frame of tree data or \code{forest} object from package medfate.}
 
+\item{SpParams}{Data frame of species parameters suitable for medfate package (not used).}
+
 \item{area}{Either 'Atlantic' or 'Mediterranean' to specify allometric equations specific to the area (for Pinus pinaster)}
 
-\item{fraction}{A string, either "total" or "aerial".}
+\item{fraction}{A string, either "total" (for total biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).}
+
+\item{level}{A string, either "cohort" (for tree cohort biomass) or "stand" (for stand-level biomass).}
 }
 \value{
 A vector of biomass of each tree cohort (in Mg/ha of dry weight) to be used in medfate or medfateland packages.
@@ -21,7 +31,7 @@ Wrapper function to be used to calculate tree biomass for packages medfate and m
 }
 \details{
 Values for parameter \code{x} will be supplied by the calling function (e.g. \code{modify_forest_structure}). Values for parameters
-\code{area}, and \code{fraction} (if they defaults need to be changed) should be supplied using as a list to parameter \code{biomass_arguments}.
+\code{area}, \code{fraction} and \code{level} (if they defaults need to be changed) should be supplied using as a list to parameter \code{biomass_arguments}.
 }
 \seealso{
 \code{\link{IFNbiomass}}

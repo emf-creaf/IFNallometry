@@ -39,8 +39,8 @@ head(exampleTreeData)
 #> 349 80001      22 31.83099 13.7 8.0
 ```
 
-And here is the result of calculating timber volumes, using plot ID to
-extract the Spanish province:
+Below is the code and result of calculating timber volumes, using plot
+ID to extract the Spanish province:
 
 ``` r
 example_volumes <- IFNvolume(exampleTreeData, provinceFromID = TRUE)
@@ -52,6 +52,27 @@ head(example_volumes)
 #> 4 80001      22 Pinus uncinata  1 2.150192 1.750104 -0.001320525 0.06097990
 #> 5 80001      22 Pinus uncinata  1 4.176124 3.514192  0.071731231 0.08434162
 #> 6 80001      22 Pinus uncinata  1 2.441344 1.846656 -0.061216067 0.10679360
+```
+
+And here is the code and result of calculating biomass components:
+
+``` r
+example_biomass <- IFNbiomass(exampleTreeData)
+head(example_biomass)
+#>      ID Species           Name SpeciesAllom      NameAllom    Roots      Stem
+#> 1 80001      22 Pinus uncinata           22 Pinus uncinata 2194.477 1731.1354
+#> 2 80001      22 Pinus uncinata           22 Pinus uncinata 2328.041 1836.4987
+#> 3 80001      22 Pinus uncinata           22 Pinus uncinata 1559.627 1558.4148
+#> 4 80001      22 Pinus uncinata           22 Pinus uncinata 1533.634 1129.1675
+#> 5 80001      22 Pinus uncinata           22 Pinus uncinata 2919.580 2456.6831
+#> 6 80001      22 Pinus uncinata           22 Pinus uncinata 1153.051  970.2358
+#>    Branches Leaves Needles Bark   Aerial    Total
+#> 1 1448.8434     NA      NA   NA 3179.979 5374.456
+#> 2 1308.8274     NA      NA   NA 3145.326 5473.367
+#> 3  877.7623     NA      NA   NA 2436.177 3995.804
+#> 4  958.3115     NA      NA   NA 2087.479 3621.113
+#> 5 1541.9793     NA      NA   NA 3998.662 6918.243
+#> 6  748.7747     NA      NA   NA 1719.010 2872.062
 ```
 
 ## Documentation

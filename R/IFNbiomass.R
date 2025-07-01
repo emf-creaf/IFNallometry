@@ -202,21 +202,25 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
 #' Wrapper function to be used to calculate tree biomass for packages medfate and medfateland.
 #'
 #' @param x Data frame of tree data or \code{forest} object from package medfate.
+#' @param SpParams Data frame of species parameters suitable for medfate package (not used).
 #' @param area Either 'Atlantic' or 'Mediterranean' to specify allometric equations specific to the area (for Pinus pinaster)
-#' @param fraction A string, either "total" or "aerial".
+#' @param fraction A string, either "total" (for total biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).
+#' @param level A string, either "cohort" (for tree cohort biomass) or "stand" (for stand-level biomass).
 #'
 #' @returns A vector of biomass of each tree cohort (in Mg/ha of dry weight) to be used in medfate or medfateland packages.
 #'
 #' @details Values for parameter \code{x} will be supplied by the calling function (e.g. \code{modify_forest_structure}). Values for parameters
-#' \code{area}, and \code{fraction} (if they defaults need to be changed) should be supplied using as a list to parameter \code{biomass_arguments}.
+#' \code{area}, \code{fraction} and \code{level} (if they defaults need to be changed) should be supplied using as a list to parameter \code{biomass_arguments}.
 #'
 #' @seealso \code{\link{IFNbiomass}}
 #' @export
-IFNbiomass_medfate<-function(x,
+IFNbiomass_medfate<-function(x, SpParams,
                              area = NA,
-                             fraction = "aerial"){
+                             fraction = "total",
+                             level = "cohort"){
   if(inherits(x, "forest")) x <- x$treeData
-  fraction <- match.arg(fraction, c("total", "aerial"))
+  fraction <- match.arg(fraction, c("total", "aboveground", "belowground"))
+  level <- match.arg(level, c("cohort", "stand"))
   ntree <- nrow(x)
   if(ntree>0) {
     y <- data.frame(ID = rep("XX", ntree),
@@ -228,9 +232,12 @@ IFNbiomass_medfate<-function(x,
     biomass_df <- IFNallometry::IFNbiomass(y, as.CO2 = FALSE)
     if(fraction=="total") {
       bio <- biomass_df$Total
-    } else {
+    } else if(fraction=="aboveground") {
       bio <- biomass_df$Aerial
+    } else if(fraction=="belowground") {
+      bio <- biomass_df$Total - biomass_df$Aerial
     }
+    if(level == "stand") bio <- sum(bio)
     return(bio/1000) #From kg/ha to Mg/ha
   }
   return(numeric(0))

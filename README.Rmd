@@ -40,11 +40,18 @@ data("exampleTreeData")
 head(exampleTreeData)
 ```
 
-And here is the result of calculating timber volumes, using plot ID to extract the Spanish province:
+Below is the code and result of calculating timber volumes, using plot ID to extract the Spanish province:
 
 ```{r}
 example_volumes <- IFNvolume(exampleTreeData, provinceFromID = TRUE)
 head(example_volumes)
+```
+
+And here is the code and result of calculating biomass components:
+
+```{r}
+example_biomass <- IFNbiomass(exampleTreeData)
+head(example_biomass)
 ```
 
 ## Documentation

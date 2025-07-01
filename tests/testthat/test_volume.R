@@ -18,3 +18,11 @@ test_that("volumes can be calculated from species names",{
   expect_s3_class(IFNvolume(exampleTreeData2, provinceFromID = TRUE), "data.frame")
   expect_s3_class(IFNvolume(exampleTreeData2, provinceFromID = FALSE), "data.frame")
 })
+
+test_that("volumes can be calculated for medfate",{
+  testthat::skip_if_not_installed("medfate")
+  testthat::skip_on_cran()
+  testthat::skip_on_ci()
+  expect_type(IFNvolume_medfate(medfate::exampleforest, medfate::SpParamsMED, province = "8"), "double")
+  expect_type(IFNvolume_medfate(medfate::exampleforest, medfate::SpParamsMED, province = "8", level = "stand"), "double")
+})

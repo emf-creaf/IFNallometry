@@ -192,6 +192,7 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
 #' @param SpParams Data frame of species parameters suitable for medfate package (not used).
 #' @param province Spanish province code.
 #' @param min_dbh Minimum diameter at breast height (in cm) for timber estimation.
+#' @param level A string, either "cohort" (for tree cohort volume) or "stand" (for stand-level volume).
 #'
 #' @returns A vector of timber volumes per tree cohort (in m3/ha) to be used in medfateland simulations.
 #'
@@ -202,8 +203,10 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
 #' @export
 IFNvolume_medfate<-function(x, SpParams,
                             province,
-                            min_dbh = 7.5){
+                            min_dbh = 7.5,
+                            level = "cohort"){
   if(inherits(x, "forest")) x <- x$treeData
+  level <- match.arg(level, c("cohort", "stand"))
   ntree <- nrow(x)
   if(ntree>0) {
     y <- data.frame(ID = rep("XX", ntree),
@@ -216,6 +219,7 @@ IFNvolume_medfate<-function(x, SpParams,
     vol <- IFNallometry::IFNvolume(y)
     vcc <- pmax(0,vol$VCC)
     vcc[x$DBH < min_dbh] <- 0
+    if(level == "stand") vcc <- sum(vcc)
     return(vcc) #m3/ha
   }
   return(numeric(0))
