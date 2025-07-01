@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
   [![R-CMD-check](https://github.com/emf-creaf/IFNallometry/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/emf-creaf/IFNallometry/actions/workflows/R-CMD-check.yaml)
   <!-- badges: end -->
 
-The goal of IFNallometry is to ...
+The goal of IFNallometry is to provide routines for calculating volume and biomass for forest stands using allometries developed from Spanish Forest Inventory (IFN) plot data.
 
 ## Installation
 
@@ -32,17 +32,32 @@ pak::pak("emf-creaf/IFNallometry")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Here is an example data set of forest plot input to the package:
 
 ```{r example}
 library(IFNallometry)
-## basic example code
+data("exampleTreeData")
+head(exampleTreeData)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+And here is the result of calculating timber volumes, using plot ID to extract the Spanish province:
 
-```{r cars}
-summary(cars)
+```{r}
+example_volumes <- IFNvolume(exampleTreeData, provinceFromID = TRUE)
+head(example_volumes)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+## Documentation
+
+So far, the only documentation provided is the one included for package functions.
+
+## Companion R packages
+
+The development of **IFNallometries** is intended to complement packages [**medfate**](https://emf-creaf.github.io/medfate) and [**medfateland**](https://emf-creaf.github.io/medfateland) but it can be used independently. 
+
+
+
+## Authorship
+
+This R package is developed and maintained by the [*Ecosystem Modelling Facility*](https://emf.creaf.cat) unit at [*CREAF*](https://www.creaf.cat/) (in Spain), in close collaboration with researchers from  [*CTFC*](https://www.ctfc.cat/) (in Spain).
+

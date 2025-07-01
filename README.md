@@ -8,7 +8,9 @@
 [![R-CMD-check](https://github.com/emf-creaf/IFNallometry/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/emf-creaf/IFNallometry/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of IFNallometry is to …
+The goal of IFNallometry is to provide routines for calculating volume
+and biomass for forest stands using allometries developed from Spanish
+Forest Inventory (IFN) plot data.
 
 ## Installation
 
@@ -22,26 +24,51 @@ pak::pak("emf-creaf/IFNallometry")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Here is an example data set of forest plot input to the package:
 
 ``` r
 library(IFNallometry)
-## basic example code
+data("exampleTreeData")
+head(exampleTreeData)
+#>        ID Species        N  DBH   H
+#> 344 80001      22 31.83099 18.9 7.5
+#> 345 80001      22 14.14711 29.2 7.5
+#> 346 80001      22 14.14711 23.9 9.5
+#> 347 80001      22 14.14711 23.7 7.0
+#> 348 80001      22 14.14711 32.7 8.0
+#> 349 80001      22 31.83099 13.7 8.0
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+And here is the result of calculating timber volumes, using plot ID to
+extract the Spanish province:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+example_volumes <- IFNvolume(exampleTreeData, provinceFromID = TRUE)
+head(example_volumes)
+#>      ID Species           Name FC      VCC      VSC          VLE       IAVC
+#> 1 80001      22 Pinus uncinata  1 3.602559 2.860209 -0.035419361 0.12176755
+#> 2 80001      22 Pinus uncinata  1 3.229656 2.690636  0.033717806 0.07381033
+#> 3 80001      22 Pinus uncinata  1 2.805269 2.321029  0.018885424 0.06887026
+#> 4 80001      22 Pinus uncinata  1 2.150192 1.750104 -0.001320525 0.06097990
+#> 5 80001      22 Pinus uncinata  1 4.176124 3.514192  0.071731231 0.08434162
+#> 6 80001      22 Pinus uncinata  1 2.441344 1.846656 -0.061216067 0.10679360
 ```
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+## Documentation
+
+So far, the only documentation provided is the one included for package
+functions.
+
+## Companion R packages
+
+The development of **IFNallometries** is intended to complement packages
+[**medfate**](https://emf-creaf.github.io/medfate) and
+[**medfateland**](https://emf-creaf.github.io/medfateland) but it can be
+used independently.
+
+## Authorship
+
+This R package is developed and maintained by the [*Ecosystem Modelling
+Facility*](https://emf.creaf.cat) unit at
+[*CREAF*](https://www.creaf.cat/) (in Spain), in close collaboration
+with researchers from [*CTFC*](https://www.ctfc.cat/) (in Spain).
