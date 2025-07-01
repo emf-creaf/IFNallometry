@@ -7,3 +7,22 @@ template:
     pkgdown-nav-height: 100px
     primary: "#241F1C"
 
+reference:
+- title: Datasets
+  desc:  Ancillary and example data included with the package
+  contents:
+  - starts_with("example_tree_data")
+  - starts_with("species_ifn")
+  - starts_with("provincias")
+
+- title: Main functions
+  desc:  Main functions to calculate tree biomass and volume
+  contents:
+  - starts_with("IFNbiomass")
+  - starts_with("IFNvolume")
+
+- title: Wrapper functions
+  desc:  Wrapper functions to calculate tree biomass and volume from other packages
+  contents:
+  - starts_with("IFNbiomass_medfate")
+  - starts_with("IFNvolume_medfate")
