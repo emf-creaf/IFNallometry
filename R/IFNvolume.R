@@ -34,8 +34,8 @@
 #' @return If \code{DBHclasses = NULL}, a data frame with as many rows as tree records in \code{x} and columns:
 #' \itemize{
 #'   \item{\code{ID}: Plot identifier}
-#'   \item{\code{Species}: Species code or species name}
-#'   \item{\code{Name}: Species name}
+#'   \item{\code{Species}: Species code or species name used as input. }
+#'   \item{\code{Name}: Species name given in volume equations.}
 #'   \item{\code{FC}: Cubic content form used to calculate volume.}
 #'   \item{\code{VCC}: Volumen con corteza (m3/ha).}
 #'   \item{\code{VSC}: Volumen sin corteza (m3/ha).}
@@ -47,6 +47,8 @@
 #' @details The volumetric equation used for each tree record depends on province, species, cubic content form and volume parameter (VCC, VSC, VLE and IAVC).
 #' Volumes are given as per hectare (i.e. the result of the volumetric equation is multiplied by the density 'N'). If cubic content form is not given in 'x', then
 #' the function iterates over the values of 'FC' until an equation is available.
+#'
+#' Species can be supplied as IFN codes or species names. In the latter case, the function will convert them to codes using \code{\link{species_ifn}} data table.
 #'
 #' @examples
 #' data(exampleTreeData)
@@ -104,6 +106,15 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
     provincei = as.numeric(s[1])
     taxoni <- s[2]
     if(nchar(taxoni)<=4) taxoni <- as.numeric(taxoni)
+    # Translate species names according to IFN
+    if(!is.numeric(taxoni)) {
+      if(taxoni %in% species_ifn$Species) {
+        taxoni <- species_ifn$IFNcode[species_ifn$Species==taxoni][1]
+      } else {
+        warning(paste0("Species name '", taxoni,"' not found. 99 code (otras frondosas) will be used."))
+        taxoni <- 99
+      }
+    }
     sel = (prov_tax_fc==un_prov_tax_fc[i])
 
     # print(provincei)
