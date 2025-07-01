@@ -1,3 +1,11 @@
 ^data-raw$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.github$
+^_pkgdown.yml$
+^vignettes/*$
+^README\.md$
+^README\.Rmd$
+^pkgdown/*$
+metadata.yml
+featured.png
