@@ -98,10 +98,10 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
   prov_tax_fc = paste(Province, Species, fc, sep="_")
   un_prov_tax_fc = unique(prov_tax_fc)
   if(verbose) {
-    pb = txtProgressBar(1, length(un_prov_tax_fc), style=3)
+    cli::cli_progress_bar("Species", total = length(un_prov_tax_fc))
   }
   for(i in 1:length(un_prov_tax_fc)) {
-    if(verbose) setTxtProgressBar(pb, i)
+    if(verbose) cli::cli_progress_update()
     s = strsplit(un_prov_tax_fc[i],"_")[[1]]
     provincei = as.numeric(s[1])
     taxoni <- s[2]
