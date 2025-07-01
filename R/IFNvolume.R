@@ -175,9 +175,11 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
   }
   if(!is.null(DBHclasses)) {
     df$DBHclass = cut(x$DBH, DBHclasses)
-    df<-as.data.frame(df  %>% dplyr::group_by(ID, Species, Name, DBHclass, FC)  %>%
-      dplyr::summarize(VCC = sum(VCC, na.rm=T), VSC = sum(VSC, na.rm= T), VLE = sum(VLE, na.rm=T),
-                       IAVC = sum(IAVC, na.rm=T)))
+    df<-as.data.frame(df  %>% dplyr::group_by("ID", "Species", "Name", "DBHclass", "FC")  %>%
+      dplyr::summarize(VCC = sum(.data$VCC, na.rm=T),
+                       VSC = sum(.data$VSC, na.rm= T),
+                       VLE = sum(.data$VLE, na.rm=T),
+                       IAVC = sum(.data$IAVC, na.rm=T)))
 
   }
   return(df)

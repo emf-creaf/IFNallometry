@@ -186,10 +186,10 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
   }
   if(!is.null(DBHclasses)) {
     df$DBHclass = cut(x$DBH, DBHclasses)
-    df<-as.data.frame(df  %>% dplyr::group_by(ID, Species, Name, SpeciesAllom, NameAllom, DBHclass)  %>%
-                        dplyr::summarize(Roots = sum(Roots, na.rm=T), Stem = sum(Stem, na.rm= T), Branches = sum(Branches, na.rm=T),
-                                         Leaves = sum(Leaves, na.rm=T), Needles  = sum(Needles , na.rm=T), Bark = sum(Bark, na.rm=T),
-                                         Aerial = sum(Aerial, na.rm=T), Total = sum(Total, na.rm=T)))
+    df<-as.data.frame(df  %>% dplyr::group_by("ID", "Species", "Name", "SpeciesAllom", "NameAllom", "DBHclass")  %>%
+                        dplyr::summarize(Roots = sum(.data$Roots, na.rm=T), Stem = sum(.data$Stem, na.rm= T), Branches = sum(.data$Branches, na.rm=T),
+                                         Leaves = sum(.data$Leaves, na.rm=T), Needles  = sum(.data$Needles , na.rm=T), Bark = sum(.data$Bark, na.rm=T),
+                                         Aerial = sum(.data$Aerial, na.rm=T), Total = sum(.data$Total, na.rm=T)))
 
   }
 

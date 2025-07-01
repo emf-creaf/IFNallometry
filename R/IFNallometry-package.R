@@ -23,3 +23,6 @@
 #' @importFrom tibble tibble as_tibble add_column
 ## usethis namespace: end
 NULL
+
+# global variable exporting
+utils::globalVariables(c(".data", "species_ifn"))
