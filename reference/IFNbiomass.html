@@ -100,9 +100,9 @@ Montero G, Ruiz-Peinado R, Muñoz M (2005) Producción de biomasa y fijación de
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">exampleTreeData</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">example_tree_data</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">IFNbiomass</span><span class="op">(</span><span class="va">exampleTreeData</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">IFNbiomass</span><span class="op">(</span><span class="va">example_tree_data</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       ID Species             Name SpeciesAllom             NameAllom     Roots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  80001      22   Pinus uncinata           22        Pinus uncinata 2194.4771</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  80001      22   Pinus uncinata           22        Pinus uncinata 2328.0410</span>
@@ -187,7 +187,7 @@ Montero G, Ruiz-Peinado R, Muñoz M (2005) Producción de biomasa y fijación de
 <span class="r-out co"><span class="r-pr">#&gt;</span> 40 1449.5129 1021.1228     NA      NA   NA 2470.6356  3289.245</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Groups the result by DBH clases</span></span></span>
-<span class="r-in"><span><span class="fu">IFNbiomass</span><span class="op">(</span><span class="va">exampleTreeData</span>,</span></span>
+<span class="r-in"><span><span class="fu">IFNbiomass</span><span class="op">(</span><span class="va">example_tree_data</span>,</span></span>
 <span class="r-in"><span>           DBHclasses <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">120</span>, by<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       ID Species             Name SpeciesAllom             NameAllom DBHclass</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  80001      22   Pinus uncinata           22        Pinus uncinata   (5,10]</span>
