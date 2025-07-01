@@ -1,0 +1,29 @@
+id: 'IFNallometry'
+title: IFNallometry
+emf_type: softwork
+emf_public: true
+emf_automatized: true
+emf_reproducible: false
+emf_draft: false
+emf_data_type: emf_data_product
+data_repository: ''
+model_repository: ''
+nodes:
+- "medfate_model"
+authors:
+- "mcaceres"
+resource_link: softworks/IFNallometry
+tags:
+- R
+- models
+- "forest dynamics"
+links:
+  url_pdf: ''
+  url_doi: ''
+  url_docs: 'https://emf-creaf.github.io/IFNallometry/'
+  url_source: 'https://github.com/emf-creaf/IFNallometry/'
+requirements:
+- 'R (>= 4.1.0)'
+description: 'Routines for calculating volume and biomass for Spanish Forest Inventory (IFN) plots'
+date: '2025-07-01'
+date_lastmod: '2025-07-01'
