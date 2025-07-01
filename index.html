@@ -74,7 +74,7 @@
 <span><span class="co">#&gt; 347 80001      22 14.14711 23.7 7.0</span></span>
 <span><span class="co">#&gt; 348 80001      22 14.14711 32.7 8.0</span></span>
 <span><span class="co">#&gt; 349 80001      22 31.83099 13.7 8.0</span></span></code></pre></div>
-<p>And here is the result of calculating timber volumes, using plot ID to extract the Spanish province:</p>
+<p>Below is the code and result of calculating timber volumes, using plot ID to extract the Spanish province:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_volumes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/IFNvolume.html">IFNvolume</a></span><span class="op">(</span><span class="va">exampleTreeData</span>, provinceFromID <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">example_volumes</span><span class="op">)</span></span>
@@ -85,6 +85,24 @@
 <span><span class="co">#&gt; 4 80001      22 Pinus uncinata  1 2.150192 1.750104 -0.001320525 0.06097990</span></span>
 <span><span class="co">#&gt; 5 80001      22 Pinus uncinata  1 4.176124 3.514192  0.071731231 0.08434162</span></span>
 <span><span class="co">#&gt; 6 80001      22 Pinus uncinata  1 2.441344 1.846656 -0.061216067 0.10679360</span></span></code></pre></div>
+<p>And here is the code and result of calculating biomass components:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">example_biomass</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/IFNbiomass.html">IFNbiomass</a></span><span class="op">(</span><span class="va">exampleTreeData</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">example_biomass</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      ID Species           Name SpeciesAllom      NameAllom    Roots      Stem</span></span>
+<span><span class="co">#&gt; 1 80001      22 Pinus uncinata           22 Pinus uncinata 2194.477 1731.1354</span></span>
+<span><span class="co">#&gt; 2 80001      22 Pinus uncinata           22 Pinus uncinata 2328.041 1836.4987</span></span>
+<span><span class="co">#&gt; 3 80001      22 Pinus uncinata           22 Pinus uncinata 1559.627 1558.4148</span></span>
+<span><span class="co">#&gt; 4 80001      22 Pinus uncinata           22 Pinus uncinata 1533.634 1129.1675</span></span>
+<span><span class="co">#&gt; 5 80001      22 Pinus uncinata           22 Pinus uncinata 2919.580 2456.6831</span></span>
+<span><span class="co">#&gt; 6 80001      22 Pinus uncinata           22 Pinus uncinata 1153.051  970.2358</span></span>
+<span><span class="co">#&gt;    Branches Leaves Needles Bark   Aerial    Total</span></span>
+<span><span class="co">#&gt; 1 1448.8434     NA      NA   NA 3179.979 5374.456</span></span>
+<span><span class="co">#&gt; 2 1308.8274     NA      NA   NA 3145.326 5473.367</span></span>
+<span><span class="co">#&gt; 3  877.7623     NA      NA   NA 2436.177 3995.804</span></span>
+<span><span class="co">#&gt; 4  958.3115     NA      NA   NA 2087.479 3621.113</span></span>
+<span><span class="co">#&gt; 5 1541.9793     NA      NA   NA 3998.662 6918.243</span></span>
+<span><span class="co">#&gt; 6  748.7747     NA      NA   NA 1719.010 2872.062</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
