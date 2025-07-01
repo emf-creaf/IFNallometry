@@ -46,7 +46,12 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A data frame with tree records in rows and columns 'Species', 'DBH' (in cm), 'H' (in m) and 'N' (ha-1)</p></dd>
+<dd><p>A data frame with tree records in rows and columns:</p><ul><li><p><code>ID</code>: String identifying forest stand.</p></li>
+<li><p><code>Species</code>: Species numeric used in IFN or a species name matching names given in <code><a href="species_ifn.html">species_ifn</a></code>.</p></li>
+<li><p><code>DBH</code>: Tree diameter at breast height (in cm).</p></li>
+<li><p><code>H</code>: Tree height (in m).</p></li>
+<li><p><code>N</code>: Tree density factor (in ind/ha).</p></li>
+</ul></dd>
 
 
 <dt id="arg-as-co-">as.CO2<a class="anchor" aria-label="anchor" href="#arg-as-co-"></a></dt>
@@ -69,8 +74,7 @@ taken from Montero et al. (2005) (in turn, from Ibáñez et al. 2002).</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>If <code>DBHclasses = NULL</code>, function <code>IFNbiomass</code> returns a data frame with as many rows as tree records in <code>x</code> and columns 'ID', 'Species', 'Roots', 'Stem', 'Branches', 'Leaves', 'Needles', 'Bark', 'Aerial' and 'Total'.
-If <code>DBHclasses != NULL</code> then an extra column <code>DBHclass</code> is given and the data frame has less rows than tree records in <code>x</code>.
-Function <code>IFNproducts</code> returns a data frame with the biomass of products (as well as that of stumps and slash), assuming trees have been felled down.</p>
+If <code>DBHclasses != NULL</code> then an extra column <code>DBHclass</code> is given and the data frame has less rows than tree records in <code>x</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -78,6 +82,7 @@ Function <code>IFNproducts</code> returns a data frame with the biomass of produ
 All equations are calculated form height and diameter at breast height (DBH) of felled trees. Biomass values from equations refer to
 individual trees, but the function multiplies the result by the density of individuals 'N', so the resulting value is in units of kg/ha.
 Biomass of branches is the result of adding the result of equations calibrated for different branch diameters.</p>
+<p>When species are provided as character names, both exact matching and function <code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">startsWith</a></code> are used.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -87,6 +92,10 @@ Biomass of branches is the result of adding the result of equations calibrated f
 Montero G, Ruiz-Peinado R, Muñoz M (2005) Producción de biomasa y fijación de CO2 por los bosques españoles. Monografias INIA: Serie Forestal nº 13.</p>
 <p>Ruiz-Peinado, R., M. Rio, and G. Montero (2011) New models for estimating the carbon sink capacity of Spanish. Forest Systems 20:176–188.</p>
 <p>Ruiz-Peinado, R., G. Montero, and M. Del Rio (2012) Biomass models to estimate carbon stocks for hardwood tree species. Forest Systems 21:42.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="IFNvolume.html">IFNvolume</a></code></p></div>
     </div>
 
     <div class="section level2">

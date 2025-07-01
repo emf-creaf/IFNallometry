@@ -54,8 +54,14 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A data frame with tree records in rows and columns 'Provincia' (numeric), 'Species', 'DBH' (in cm), 'H' (in m) and 'N' (ha-1).
-Additionally, the data frame may include a column 'FC' that specifies the cubic content form for each tree. In this case, the value of parameter 'FC' is overriden.</p></dd>
+<dd><p>A data frame with tree records in rows and columns:</p><ul><li><p><code>ID</code>: String identifying forest stand.</p></li>
+<li><p><code>Species</code>: Species numeric used in IFN or a species name matching names given in <code><a href="species_ifn.html">species_ifn</a></code>.</p></li>
+<li><p><code>DBH</code>: Tree diameter at breast height (in cm).</p></li>
+<li><p><code>H</code>: Tree height (in m).</p></li>
+<li><p><code>N</code>: Tree density factor (in ind/ha).</p></li>
+<li><p><code>Provincia</code>: Numeric or character province code (optional). If not provided, the user should set <code>provinceFromID = TRUE</code>.</p></li>
+<li><p><code>FC</code>: The cubic content form for each tree (optional). In this case, the value of parameter <code>FC</code> is overriden.</p></li>
+</ul></dd>
 
 
 <dt id="arg-ifn">IFN<a class="anchor" aria-label="anchor" href="#arg-ifn"></a></dt>
@@ -89,11 +95,11 @@ Additionally, the data frame may include a column 'FC' that specifies the cubic 
 
 
 <dt id="arg-provincefromid">provinceFromID<a class="anchor" aria-label="anchor" href="#arg-provincefromid"></a></dt>
-<dd><p>A flag to indicate that province should be extracted from 'ID' assuming they are IFN plot codes.</p></dd>
+<dd><p>A flag to indicate that province code should be extracted from the first characters of column <code>ID</code> in <code>x</code>.</p></dd>
 
 
 <dt id="arg-dbhclasses">DBHclasses<a class="anchor" aria-label="anchor" href="#arg-dbhclasses"></a></dt>
-<dd><p>A numeric vector of DBH class limits (see breaks in function <code>cut</code>), used to group results by DBH class (in addition to species and plot). If <code>DBHclasses = NULL</code> then grouping on the basis of DBH classes is not performed.</p></dd>
+<dd><p>A numeric vector of DBH class limits (see breaks in function <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></code>), used to group results by DBH class (in addition to species and plot). If <code>DBHclasses = NULL</code> then grouping on the basis of DBH classes is not performed.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
@@ -102,9 +108,9 @@ Additionally, the data frame may include a column 'FC' that specifies the cubic 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>If <code>DBHclasses = NULL</code>, a data frame with as many rows as tree records in <code>x</code> and columns:</p><ul><li><p><code>ID</code>: Plot identifier</p></li>
-<li><p><code>Species</code>: Species code or species name used as input.</p></li>
-<li><p><code>Name</code>: Species name given in volume equations.</p></li>
+    <p>If <code>DBHclasses = NULL</code>, a data frame with as many rows as tree records in <code>x</code> and columns:</p><ul><li><p><code>ID</code>: Forest plot identifier, as given in input.</p></li>
+<li><p><code>Species</code>: Species code or species name given in input.</p></li>
+<li><p><code>Name</code>: Species name given in volume allometry equations.</p></li>
 <li><p><code>FC</code>: Cubic content form used to calculate volume.</p></li>
 <li><p><code>VCC</code>: Volumen con corteza (m3/ha).</p></li>
 <li><p><code>VSC</code>: Volumen sin corteza (m3/ha).</p></li>
@@ -117,7 +123,12 @@ Additionally, the data frame may include a column 'FC' that specifies the cubic 
     <p>The volumetric equation used for each tree record depends on province, species, cubic content form and volume parameter (VCC, VSC, VLE and IAVC).
 Volumes are given as per hectare (i.e. the result of the volumetric equation is multiplied by the density 'N'). If cubic content form is not given in 'x', then
 the function iterates over the values of 'FC' until an equation is available.</p>
-<p>Species can be supplied as IFN codes or species names. In the latter case, the function will convert them to codes using <code><a href="species_ifn.html">species_ifn</a></code> data table.</p>
+<p>Species can be supplied as IFN codes or species names. In the latter case, the function will convert them to codes using <code><a href="species_ifn.html">species_ifn</a></code> data table.
+When species are provided as character names, both exact matching and function <code><a href="https://rdrr.io/r/base/startsWith.html" class="external-link">startsWith</a></code> are used.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="IFNbiomass.html">IFNbiomass</a></code> <code><a href="IFNvolume_medfate.html">IFNvolume_medfate</a></code></p></div>
     </div>
 
     <div class="section level2">
