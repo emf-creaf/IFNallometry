@@ -189,48 +189,10 @@ Montero G, Ruiz-Peinado R, Muñoz M (2005) Producción de biomasa y fijación de
 <span class="r-in"><span><span class="co"># Groups the result by DBH clases</span></span></span>
 <span class="r-in"><span><span class="fu">IFNbiomass</span><span class="op">(</span><span class="va">example_tree_data</span>,</span></span>
 <span class="r-in"><span>           DBHclasses <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">120</span>, by<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       ID Species             Name SpeciesAllom             NameAllom DBHclass</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  80001      22   Pinus uncinata           22        Pinus uncinata   (5,10]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  80001      22   Pinus uncinata           22        Pinus uncinata  (10,15]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  80001      22   Pinus uncinata           22        Pinus uncinata  (15,20]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  80001      22   Pinus uncinata           22        Pinus uncinata  (20,25]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  80001      22   Pinus uncinata           22        Pinus uncinata  (25,30]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  80001      22   Pinus uncinata           22        Pinus uncinata  (30,35]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  80002      21 Pinus sylvestris           21      Pinus sylvestris  (20,25]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  80002      21 Pinus sylvestris           21      Pinus sylvestris  (25,30]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  80002      21 Pinus sylvestris           21      Pinus sylvestris  (30,35]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 80002      21 Pinus sylvestris           21      Pinus sylvestris  (35,40]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 80002      21 Pinus sylvestris           21      Pinus sylvestris  (40,45]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 80002      22   Pinus uncinata           22        Pinus uncinata  (15,20]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 80002      22   Pinus uncinata           22        Pinus uncinata  (20,25]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 80002      22   Pinus uncinata           22        Pinus uncinata  (25,30]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 80002      76   Acer campestre           55 Fraxinus angustifolia  (30,35]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 81073      21 Pinus sylvestris           21      Pinus sylvestris  (10,15]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 81073      21 Pinus sylvestris           21      Pinus sylvestris  (15,20]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 81073      24 Pinus halepensis           24      Pinus halepensis  (10,15]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19 81073      24 Pinus halepensis           24      Pinus halepensis  (15,20]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20 81073      24 Pinus halepensis           24      Pinus halepensis  (25,30]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         Roots       Stem  Branches Leaves Needles Bark    Aerial     Total</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1456.9642   689.6046 1459.2078      0       0    0  2148.812  3605.777</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2357.1538  1793.4552 1659.8381      0       0    0  3453.293  5810.447</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   3708.7590  3005.3291 2442.9880      0       0    0  5448.317  9157.076</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  12898.1867 12427.0857 7474.4087      0       0    0 19901.494 32799.681</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   8423.5717  7694.9815 4649.1756      0       0    0 12344.157 20767.729</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   2919.5803  2456.6831 1541.9793      0       0    0  3998.662  6918.243</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   1135.7003  1412.6365  920.8413      0       0    0  2333.478  3469.178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   1233.7026  1242.2436 1272.3318      0       0    0  2514.575  3748.278</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   9934.1283 14621.2314 7684.7995      0       0    0 22306.031 32240.159</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  5631.0522  7488.4775 5242.0279      0       0    0 12730.505 18361.558</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  3121.8023  4622.6688 2680.3234      0       0    0  7302.992 10424.794</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  2336.0206  2334.2050 1360.8376      0       0    0  3695.043  6031.063</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  1425.5988  1724.3837  736.0165      0       0    0  2460.400  3885.999</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  3592.9904  4162.9643 1872.1369      0       0    0  6035.101  9628.092</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  5348.0008  3527.5949 3599.0741      0       0    0  7126.669 12474.670</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16   754.1557   268.0153 1893.8082      0       0    0  2161.823  2915.979</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  1638.7007  1261.7995 2035.4316      0       0    0  3297.231  4935.932</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18   928.8601   690.4212  863.9298      0       0    0  1554.351  2483.211</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  1536.5019  2148.6575 1659.3556      0       0    0  3808.013  5344.515</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  1670.7220  1627.0917 1389.2648      0       0    0  3016.357  4687.079</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   "ID" "Species" "Name" "SpeciesAllom" "NameAllom" "DBHclass"    Roots     Stem</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   ID   Species   Name   SpeciesAllom   NameAllom   DBHclass 72052.15 75199.53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Branches Leaves Needles Bark   Aerial    Total</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 52437.78      0       0    0 127637.3 199689.5</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
