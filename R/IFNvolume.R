@@ -2,8 +2,16 @@
 #'
 #' Static models for the wood volume (VCC, VSC, VLE & IAVC) by species and province in the IFN
 #'
-#' @param x A data frame with tree records in rows and columns 'Provincia' (numeric), 'Species', 'DBH' (in cm), 'H' (in m) and 'N' (ha-1).
-#' Additionally, the data frame may include a column 'FC' that specifies the cubic content form for each tree. In this case, the value of parameter 'FC' is overriden.
+#' @param x A data frame with tree records in rows and columns:
+#'    \itemize{
+#'      \item{\code{ID}: String identifying forest stand.}
+#'      \item{\code{Species}: Species numeric used in IFN or a species name matching names given in \code{\link{species_ifn}}.}
+#'      \item{\code{DBH}: Tree diameter at breast height (in cm).}
+#'      \item{\code{H}: Tree height (in m).}
+#'      \item{\code{N}: Tree density factor (in ind/ha).}
+#'      \item{\code{Provincia}: Numeric or character province code (optional). If not provided, the user should set \code{provinceFromID = TRUE}.}
+#'      \item{\code{FC}: The cubic content form for each tree (optional). In this case, the value of parameter \code{FC} is overriden.}
+#'    }
 #' @param IFN Integer or integer pair to indicate order of preferred forest inventory:
 #'      (\code{IFN=2} indicates using IFN-2 only, \code{IFN=3} indicates using IFN-3 only, and \code{IFN=c(3,2)} indicates using IFN3 and if not available IFN2)
 #' @param FC Vector of integers to indicate preferred cubic content forms (1 to 6)
@@ -27,15 +35,15 @@
 #'    pertenezcan a algunas de las siguientes especies: 41, 42, 43, 55, 56, 71, 72 y 94.}
 #' }
 #' @param code_missing Species code to use when equations are not available for the species recorded ("99" is Otras frondosas)
-#' @param provinceFromID A flag to indicate that province should be extracted from 'ID' assuming they are IFN plot codes.
-#' @param DBHclasses A numeric vector of DBH class limits (see breaks in function \code{cut}), used to group results by DBH class (in addition to species and plot). If \code{DBHclasses = NULL} then grouping on the basis of DBH classes is not performed.
+#' @param provinceFromID A flag to indicate that province code should be extracted from the first characters of column \code{ID} in \code{x}.
+#' @param DBHclasses A numeric vector of DBH class limits (see breaks in function \code{\link{cut}}), used to group results by DBH class (in addition to species and plot). If \code{DBHclasses = NULL} then grouping on the basis of DBH classes is not performed.
 #' @param verbose A flag to indicate console output of the volume calculation process
 #'
 #' @return If \code{DBHclasses = NULL}, a data frame with as many rows as tree records in \code{x} and columns:
 #' \itemize{
-#'   \item{\code{ID}: Plot identifier}
-#'   \item{\code{Species}: Species code or species name used as input. }
-#'   \item{\code{Name}: Species name given in volume equations.}
+#'   \item{\code{ID}: Forest plot identifier, as given in input.}
+#'   \item{\code{Species}: Species code or species name given in input. }
+#'   \item{\code{Name}: Species name given in volume allometry equations.}
 #'   \item{\code{FC}: Cubic content form used to calculate volume.}
 #'   \item{\code{VCC}: Volumen con corteza (m3/ha).}
 #'   \item{\code{VSC}: Volumen sin corteza (m3/ha).}
@@ -49,7 +57,10 @@
 #' the function iterates over the values of 'FC' until an equation is available.
 #'
 #' Species can be supplied as IFN codes or species names. In the latter case, the function will convert them to codes using \code{\link{species_ifn}} data table.
+#' When species are provided as character names, both exact matching and function \code{\link{startsWith}} are used.
 #'
+#' @seealso \code{\link{IFNbiomass}} \code{\link{IFNvolume_medfate}}
+#' @export
 #' @examples
 #' data(exampleTreeData)
 #'
@@ -71,9 +82,11 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
                     provinceFromID = FALSE, DBHclasses = NULL,
                     verbose=FALSE) {
   Species = x$Species
-  if(!("DBH" %in% names(x))) stop("Column 'DBH' missing in 'x'")
-  if(!("N" %in% names(x))) stop("Column 'N' missing in 'x'")
-  if(!("H" %in% names(x))) stop("Column 'H' missing in 'x'")
+  if(!("ID" %in% names(x))) cli::cli_abort("Column 'ID' missing in 'x'")
+  if(!("Species" %in% names(x))) cli::cli_abort("Column 'Species' missing in 'x'")
+  if(!("DBH" %in% names(x))) cli::cli_abort("Column 'DBH' missing in 'x'")
+  if(!("N" %in% names(x))) cli::cli_abort("Column 'N' missing in 'x'")
+  if(!("H" %in% names(x))) cli::cli_abort("Column 'H' missing in 'x'")
   DBH = x$DBH*10 #From cm to mm (models are calibrated with these units)
   H = x$H
   N = x$N
@@ -86,7 +99,7 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
   if(provinceFromID) {
     Province = .getProvinceFromID(x$ID)
   } else {
-    if(!("Provincia" %in% names(x)) && !("Province" %in% names(x))) stop("Column 'Provincia' or 'Province' missing in 'x'")
+    if(!("Provincia" %in% names(x)) && !("Province" %in% names(x))) cli::cli_abort("Column 'Provincia' or 'Province' missing in 'x'")
     if("Provincia" %in% names(x)) Province = x$Provincia
     else Province = x$Province
   }
@@ -109,10 +122,12 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
     # Translate species names according to IFN
     if(!is.numeric(taxoni)) {
       if(taxoni %in% species_ifn$Species) {
-        taxoni <- species_ifn$IFNcode[species_ifn$Species==taxoni][1]
+        taxoni <- species_ifn$IFNcode[species_ifn$Species == taxoni][1]
+      } else if(any(startsWith(species_ifn$Species,taxoni))) {
+        taxoni <- species_ifn$IFNcode[startsWith(species_ifn$Species,taxoni)][1]
       } else {
-        warning(paste0("Species name '", taxoni,"' not found. 99 code (otras frondosas) will be used."))
-        taxoni <- 99
+        cli::cli_alert_warning(paste0("Species name '", taxoni,"' not found in 'species_ifn'. ", code_missing," code will be used."))
+        taxoni <- code_missing
       }
     }
     sel = (prov_tax_fc==un_prov_tax_fc[i])
@@ -183,6 +198,7 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
 #' @details Values for parameters \code{x} and \code{SpParams} will be supplied by the simulation function (e.g. \code{fordyn_scenario}) during calculations. Values for parameters
 #' \code{province} and \code{min_dbh} should be supplied using as a list to parameter \code{volume_arguments}. See documentation of package medfateland.
 #'
+#' @seealso \code{\link{IFNvolume}}
 #' @export
 IFNvolume_medfate<-function(x, SpParams,
                             province,

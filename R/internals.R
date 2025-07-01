@@ -55,7 +55,7 @@
   else if(model==7) {
     return(.biomassModel7(DBH, par[["beta"]], par[["gamma"]]))
   }
-  stop("Wrong parameter 'model' (must be an integer between 1 and 7)")
+  cli::cli_abort("Wrong parameter 'model' (must be an integer between 1 and 7)")
 }
 
 .getBiomassParams<-function(sp, compartment, area = NA) {
@@ -176,7 +176,7 @@
   else if(model==25) {
     return(.volumeModel25(DBH, HT, par[["p"]], par[["q"]], par[["r"]]))
   }
-  stop(paste("Wrong parameter 'model' ", model))
+  cli::cli_abort(paste("Wrong parameter 'model' ", model))
 }
 .getVolumeParams<-function(ifn, prov, sp, param, fc, code_missing = "99") {
   # Select IFN, parameter and FC

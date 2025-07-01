@@ -5,9 +5,7 @@
 #' @format
 #' Tree data corresponding to three forest plots. Data frame with 40 rows (tree records) and columns:
 #' \itemize{
-#'   \item{\code{Provincia}: Province.}
-#'   \item{\code{Estadillo}: Plot code within province.}
-#'   \item{\code{ID}: Unique plot code within IFN.}
+#'   \item{\code{ID}: Forest plot code, defined as the combination of province code and "estadillo".}
 #'   \item{\code{Species}: Tree species code.}
 #'   \item{\code{N}: Tree density (individuals per hectare) that the record represents.}
 #'   \item{\code{DBH}: Tree diameter at breast height (cm).}

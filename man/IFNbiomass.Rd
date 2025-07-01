@@ -7,7 +7,14 @@
 IFNbiomass(x, as.CO2 = FALSE, area = NA, DBHclasses = NULL, verbose = FALSE)
 }
 \arguments{
-\item{x}{A data frame with tree records in rows and columns 'Species', 'DBH' (in cm), 'H' (in m) and 'N' (ha-1)}
+\item{x}{A data frame with tree records in rows and columns:
+\itemize{
+  \item{\code{ID}: String identifying forest stand.}
+  \item{\code{Species}: Species numeric used in IFN or a species name matching names given in \code{\link{species_ifn}}.}
+  \item{\code{DBH}: Tree diameter at breast height (in cm).}
+  \item{\code{H}: Tree height (in m).}
+  \item{\code{N}: Tree density factor (in ind/ha).}
+}}
 
 \item{as.CO2}{Flag to indicate output as kg of CO2 / ha instead of kg of dry weight / ha. Percentage of carbon per dry weight biomass by species are
 taken from Montero et al. (2005) (in turn, from Ibáñez et al. 2002).}
@@ -21,7 +28,6 @@ taken from Montero et al. (2005) (in turn, from Ibáñez et al. 2002).}
 \value{
 If \code{DBHclasses = NULL}, function \code{IFNbiomass} returns a data frame with as many rows as tree records in \code{x} and columns 'ID', 'Species', 'Roots', 'Stem', 'Branches', 'Leaves', 'Needles', 'Bark', 'Aerial' and 'Total'.
 If \code{DBHclasses != NULL} then an extra column \code{DBHclass} is given and the data frame has less rows than tree records in \code{x}.
-Function \code{IFNproducts} returns a data frame with the biomass of products (as well as that of stumps and slash), assuming trees have been felled down.
 }
 \description{
 Static models for the biomass (kg/ha) of stem, roots, branches, leaves/needles and bark of species in the IFN
@@ -31,6 +37,8 @@ Function \code{IFNbiomass} determines the allometric equation for each biomass f
 All equations are calculated form height and diameter at breast height (DBH) of felled trees. Biomass values from equations refer to
 individual trees, but the function multiplies the result by the density of individuals 'N', so the resulting value is in units of kg/ha.
 Biomass of branches is the result of adding the result of equations calibrated for different branch diameters.
+
+When species are provided as character names, both exact matching and function \code{\link{startsWith}} are used.
 }
 \examples{
 data(exampleTreeData)
@@ -51,4 +59,7 @@ Montero G, Ruiz-Peinado R, Muñoz M (2005) Producción de biomasa y fijación de
 Ruiz-Peinado, R., M. Rio, and G. Montero (2011) New models for estimating the carbon sink capacity of Spanish. Forest Systems 20:176–188.
 
 Ruiz-Peinado, R., G. Montero, and M. Del Rio (2012) Biomass models to estimate carbon stocks for hardwood tree species. Forest Systems 21:42.
+}
+\seealso{
+\code{\link{IFNvolume}}
 }

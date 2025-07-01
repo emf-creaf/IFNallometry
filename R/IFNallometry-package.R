@@ -17,7 +17,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom cli cli_progress_bar cli_progress_update
+#' @importFrom cli cli_progress_bar cli_progress_update cli_abort cli_alert_warning
 #' @importFrom tidyr %>%
 #' @importFrom dplyr group_by summarize summarize_at distinct bind_rows
 #' @importFrom tibble tibble as_tibble add_column

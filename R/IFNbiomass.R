@@ -2,7 +2,14 @@
 #'
 #' Static models for the biomass (kg/ha) of stem, roots, branches, leaves/needles and bark of species in the IFN
 #'
-#' @param x A data frame with tree records in rows and columns 'Species', 'DBH' (in cm), 'H' (in m) and 'N' (ha-1)
+#' @param x A data frame with tree records in rows and columns:
+#'    \itemize{
+#'      \item{\code{ID}: String identifying forest stand.}
+#'      \item{\code{Species}: Species numeric used in IFN or a species name matching names given in \code{\link{species_ifn}}.}
+#'      \item{\code{DBH}: Tree diameter at breast height (in cm).}
+#'      \item{\code{H}: Tree height (in m).}
+#'      \item{\code{N}: Tree density factor (in ind/ha).}
+#'    }
 #' @param as.CO2 Flag to indicate output as kg of CO2 / ha instead of kg of dry weight / ha. Percentage of carbon per dry weight biomass by species are
 #'              taken from Montero et al. (2005) (in turn, from Ibáñez et al. 2002).
 #' @param area Either 'Atlantic' or 'Mediterranean' to specify allometric equations specific to the area (for Pinus pinaster)
@@ -15,10 +22,11 @@
 #' individual trees, but the function multiplies the result by the density of individuals 'N', so the resulting value is in units of kg/ha.
 #' Biomass of branches is the result of adding the result of equations calibrated for different branch diameters.
 #'
+#' When species are provided as character names, both exact matching and function \code{\link{startsWith}} are used.
+#'
 #' @name IFNbiomass
 #' @return If \code{DBHclasses = NULL}, function \code{IFNbiomass} returns a data frame with as many rows as tree records in \code{x} and columns 'ID', 'Species', 'Roots', 'Stem', 'Branches', 'Leaves', 'Needles', 'Bark', 'Aerial' and 'Total'.
 #' If \code{DBHclasses != NULL} then an extra column \code{DBHclass} is given and the data frame has less rows than tree records in \code{x}.
-#' Function \code{IFNproducts} returns a data frame with the biomass of products (as well as that of stumps and slash), assuming trees have been felled down.
 #'
 #' @references
 #' Diéguez-Aranda, U., A. Rojo Alboreca, F. Castedo-Dorado, J. G. Álvarez González, M. Barrio-Anta, F. Crecente-Campo, J. M. González González, C. Pérez-Cruzado, R. Rodríguez Soalleiro, C. A. López-Sánchez, M. Á. Balboa-Murias, J. J. Gorgoso Varela, and F. Sánchez Rodríguez (2009) Herramientas selvícolas para la gestión forestal sostenible en Galicia. Dirección Xeral de Montes, Consellería do Medio Rural, Xunta de Galicia.
@@ -31,6 +39,7 @@
 #'
 #' Ruiz-Peinado, R., G. Montero, and M. Del Rio (2012) Biomass models to estimate carbon stocks for hardwood tree species. Forest Systems 21:42.
 #'
+#' @seealso \code{\link{IFNvolume}}
 #' @export
 #' @examples
 #' data(exampleTreeData)
@@ -42,6 +51,11 @@
 #'            DBHclasses = seq(0, 120, by=5))
 IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
                      DBHclasses = NULL, verbose = FALSE) {
+  if(!("ID" %in% names(x))) cli::cli_abort("Column 'ID' missing in 'x'")
+  if(!("Species" %in% names(x))) cli::cli_abort("Column 'Species' missing in 'x'")
+  if(!("DBH" %in% names(x))) cli::cli_abort("Column 'DBH' missing in 'x'")
+  if(!("N" %in% names(x))) cli::cli_abort("Column 'N' missing in 'x'")
+  if(!("H" %in% names(x))) cli::cli_abort("Column 'H' missing in 'x'")
   Species = x$Species
   DBH = x$DBH
   H = x$H
@@ -62,13 +76,22 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
     if(verbose) cli::cli_progress_update()
     spu = sp_unique[i]
     sel = (Species==spu)
-    # cat(paste("Taxon",spu," #", sum(sel)))
+    if(nchar(spu)>4) {
+      if(spu %in% species_ifn$Species) {
+        spu <- species_ifn$IFNcode[species_ifn$Species == spu][1]
+      } else if(any(startsWith(species_ifn$Species,spu))) {
+        spu <- species_ifn$IFNcode[startsWith(species_ifn$Species,spu)][1]
+      } else {
+        cli::cli_abort(paste0("Species name '", spu,"' not found in 'species_ifn'."))
+      }
+    }
     perc.CO2 =  biomass_species_match$PORCENTAJE_CARBONO[biomass_species_match$ID_TAXON == spu]
     taxon =  as.numeric(biomass_species_match$ID_TAXON2[biomass_species_match$ID_TAXON == spu])
-    if(length(taxon)!=1) stop(paste0("Wrong species code '", spu,"'."))
-    df$Name[sel] = biomass_species_match$LATIN_TAXON[biomass_species_match$ID_TAXON == spu]
-    df$SpeciesAllom[sel] = taxon
-    df$NameAllom[sel] = biomass_species_match$LATIN_TAXON[biomass_species_match$ID_TAXON == taxon]
+    if(length(taxon)!=1) cli::cli_abort(paste0("Species code '", spu,"' not found in biomass match table."))
+    # cat(paste("Taxon",spu," #", sum(sel)))
+    df$Name[sel] <- biomass_species_match$LATIN_TAXON[biomass_species_match$ID_TAXON == spu]
+    df$SpeciesAllom[sel] <- taxon
+    df$NameAllom[sel] <- biomass_species_match$LATIN_TAXON[biomass_species_match$ID_TAXON == taxon]
     par_stem = .getBiomassParams(taxon, "Stem", area)
     if(nrow(par_stem)>0) {
       b = .biomass(DBH[sel], H[sel], as.list(par_stem[1,]))
@@ -87,10 +110,10 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
           cat("Output:\n")
           print(b[is.na(b)])
         }
-        warning(paste("Warning: NA values in stem biomass estimation for",sum(is.na(H[sel])), "records."))
+        cli::cli_alert_warning(paste("NA values in stem biomass estimation for",sum(is.na(H[sel])), "records."))
       } else {
         if(sum(b<0)>0) {
-          warning(paste0(sum(b<0)," negative stem biomass values truncated to zero for taxon ", taxon, " with model ", par_stem[1,"Model"],"."))
+          cli::cli_alert_warning(paste0(sum(b<0)," negative stem biomass values truncated to zero for taxon ", taxon, " with model ", par_stem[1,"Model"],"."))
           b[b<0] = 0
         }
       }
@@ -171,4 +194,44 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
   }
 
   return(df)
+}
+
+
+#' Wrapper biomass function for packages medfate and medfateland
+#'
+#' Wrapper function to be used to calculate tree biomass for packages medfate and medfateland.
+#'
+#' @param x Data frame of tree data or \code{forest} object from package medfate.
+#' @param area Either 'Atlantic' or 'Mediterranean' to specify allometric equations specific to the area (for Pinus pinaster)
+#' @param fraction A string, either "total" or "aerial".
+#'
+#' @returns A vector of biomass of each tree cohort (in Mg/ha of dry weight) to be used in medfate or medfateland packages.
+#'
+#' @details Values for parameter \code{x} will be supplied by the calling function (e.g. \code{modify_forest_structure}). Values for parameters
+#' \code{area}, and \code{fraction} (if they defaults need to be changed) should be supplied using as a list to parameter \code{biomass_arguments}.
+#'
+#' @seealso \code{\link{IFNbiomass}}
+#' @export
+IFNbiomass_medfate<-function(x,
+                             area = NA,
+                             fraction = "aerial"){
+  if(inherits(x, "forest")) x <- x$treeData
+  fraction <- match.arg(fraction, c("total", "aerial"))
+  ntree <- nrow(x)
+  if(ntree>0) {
+    y <- data.frame(ID = rep("XX", ntree),
+                    Species = x$Species,
+                    DBH = x$DBH,
+                    H = x$Height/100, # Height is in cm in medfate
+                    N = x$N
+    )
+    biomass_df <- IFNallometry::IFNbiomass(y, as.CO2 = FALSE)
+    if(fraction=="total") {
+      bio <- biomass_df$Total
+    } else {
+      bio <- biomass_df$Aerial
+    }
+    return(bio/1000) #From kg/ha to Mg/ha
+  }
+  return(numeric(0))
 }

@@ -57,7 +57,8 @@ head(example_volumes)
 ## Documentation
 
 So far, the only documentation provided is the one included for package
-functions.
+functions (see package
+[website](https://emf-creaf.github.io/IFNallometry/index.html)).
 
 ## Companion R packages
 

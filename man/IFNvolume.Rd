@@ -15,8 +15,16 @@ IFNvolume(
 )
 }
 \arguments{
-\item{x}{A data frame with tree records in rows and columns 'Provincia' (numeric), 'Species', 'DBH' (in cm), 'H' (in m) and 'N' (ha-1).
-Additionally, the data frame may include a column 'FC' that specifies the cubic content form for each tree. In this case, the value of parameter 'FC' is overriden.}
+\item{x}{A data frame with tree records in rows and columns:
+\itemize{
+  \item{\code{ID}: String identifying forest stand.}
+  \item{\code{Species}: Species numeric used in IFN or a species name matching names given in \code{\link{species_ifn}}.}
+  \item{\code{DBH}: Tree diameter at breast height (in cm).}
+  \item{\code{H}: Tree height (in m).}
+  \item{\code{N}: Tree density factor (in ind/ha).}
+  \item{\code{Provincia}: Numeric or character province code (optional). If not provided, the user should set \code{provinceFromID = TRUE}.}
+  \item{\code{FC}: The cubic content form for each tree (optional). In this case, the value of parameter \code{FC} is overriden.}
+}}
 
 \item{IFN}{Integer or integer pair to indicate order of preferred forest inventory:
 (\code{IFN=2} indicates using IFN-2 only, \code{IFN=3} indicates using IFN-3 only, and \code{IFN=c(3,2)} indicates using IFN3 and if not available IFN2)}
@@ -44,18 +52,18 @@ Additionally, the data frame may include a column 'FC' that specifies the cubic 
 
 \item{code_missing}{Species code to use when equations are not available for the species recorded ("99" is Otras frondosas)}
 
-\item{provinceFromID}{A flag to indicate that province should be extracted from 'ID' assuming they are IFN plot codes.}
+\item{provinceFromID}{A flag to indicate that province code should be extracted from the first characters of column \code{ID} in \code{x}.}
 
-\item{DBHclasses}{A numeric vector of DBH class limits (see breaks in function \code{cut}), used to group results by DBH class (in addition to species and plot). If \code{DBHclasses = NULL} then grouping on the basis of DBH classes is not performed.}
+\item{DBHclasses}{A numeric vector of DBH class limits (see breaks in function \code{\link{cut}}), used to group results by DBH class (in addition to species and plot). If \code{DBHclasses = NULL} then grouping on the basis of DBH classes is not performed.}
 
 \item{verbose}{A flag to indicate console output of the volume calculation process}
 }
 \value{
 If \code{DBHclasses = NULL}, a data frame with as many rows as tree records in \code{x} and columns:
 \itemize{
-  \item{\code{ID}: Plot identifier}
-  \item{\code{Species}: Species code or species name used as input. }
-  \item{\code{Name}: Species name given in volume equations.}
+  \item{\code{ID}: Forest plot identifier, as given in input.}
+  \item{\code{Species}: Species code or species name given in input. }
+  \item{\code{Name}: Species name given in volume allometry equations.}
   \item{\code{FC}: Cubic content form used to calculate volume.}
   \item{\code{VCC}: Volumen con corteza (m3/ha).}
   \item{\code{VSC}: Volumen sin corteza (m3/ha).}
@@ -73,6 +81,7 @@ Volumes are given as per hectare (i.e. the result of the volumetric equation is 
 the function iterates over the values of 'FC' until an equation is available.
 
 Species can be supplied as IFN codes or species names. In the latter case, the function will convert them to codes using \code{\link{species_ifn}} data table.
+When species are provided as character names, both exact matching and function \code{\link{startsWith}} are used.
 }
 \examples{
 data(exampleTreeData)
@@ -91,4 +100,7 @@ IFNvolume(exampleTreeData)
 # Groups the result by DBH clases
 IFNvolume(exampleTreeData, provinceFromID = TRUE,
           DBHclasses = seq(0, 120, by=5))
+}
+\seealso{
+\code{\link{IFNbiomass}} \code{\link{IFNvolume_medfate}}
 }
