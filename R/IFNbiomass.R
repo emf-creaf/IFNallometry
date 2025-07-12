@@ -239,8 +239,13 @@ IFNbiomass_medfate<-function(x, SpParams,
     biomass_df <- IFNallometry::IFNbiomass(y, as.CO2 = FALSE)
     if(fraction=="total") {
       bio <- biomass_df$Total
+    } else if(fraction=="stem") {
+      bio <- biomass_df$Stem
+    } else if(fraction=="branches") {
+      bio <- biomass_df$Branches
     } else if(fraction=="aboveground") {
       bio <- biomass_df$Aerial
+      bio[is.na(bio)] = biomass_df$Stem[is.na(bio)] + biomass_df$Branches[is.na(bio)] # Substitute NA for aboveground by the sum of stem and branches (sometimes leaves are missing)
     } else if(fraction=="belowground") {
       bio <- biomass_df$Total - biomass_df$Aerial
     }
