@@ -313,48 +313,8 @@ When species are provided as character names, both exact matching and function <
 <span class="r-in"><span><span class="co"># Groups the result by DBH clases</span></span></span>
 <span class="r-in"><span><span class="fu">IFNvolume</span><span class="op">(</span><span class="va">example_tree_data</span>, provinceFromID <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>          DBHclasses <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">120</span>, by<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       ID Species             Name DBHclass FC       VCC        VSC         VLE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  80001      22   Pinus uncinata   (5,10]  1  4.895048  3.1326708 -0.33347833</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  80001      22   Pinus uncinata  (10,15]  1  4.658325  3.4974009 -0.12689099</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  80001      22   Pinus uncinata  (15,20]  1  6.507776  5.1118327 -0.08687711</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  80001      22   Pinus uncinata  (20,25]  1 23.021196 18.8869126  0.06863242</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  80001      22   Pinus uncinata  (25,30]  1 13.451214 11.2259774  0.15621957</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  80001      22   Pinus uncinata  (30,35]  1  4.176124  3.5141919  0.07173123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  80002      21 Pinus sylvestris  (20,25]  1  3.255691  2.5676510  0.02722542</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  80002      21 Pinus sylvestris  (25,30]  1  2.890342  2.2649519  0.02445433</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  80002      21 Pinus sylvestris  (30,35]  1 32.484089 26.3663323  0.39909227</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 80002      21 Pinus sylvestris  (35,40]  1 16.510019 13.5075936  0.25215864</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 80002      21 Pinus sylvestris  (40,45]  1 10.138500  8.3506039  0.19051014</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 80002      22   Pinus uncinata  (15,20]  1  4.522909  3.6630368 -0.01173556</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 80002      22   Pinus uncinata  (20,25]  1  3.058556  2.5416467  0.02757303</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 80002      22   Pinus uncinata  (25,30]  1  7.207054  6.0320239  0.09670736</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 80002      76         Acer sp.  (30,35]  1  3.008303  2.4968822  0.21021087</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 81073      21 Pinus sylvestris  (10,15]  1  1.084917  0.6311426  0.04738625</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 81073      21 Pinus sylvestris  (15,20]  1  3.215746  2.3820362  0.04345688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 81073      24 Pinus halepensis  (10,15]  1  4.061801  2.6784748  0.21187885</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19 81073      24 Pinus halepensis  (15,20]  1  6.700265  4.6425902  0.33184806</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20 81073      24 Pinus halepensis  (25,30]  1  4.194021  2.9741926  0.21245040</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          IAVC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.36244217</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.21064227</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.23459668</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.61044444</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.30117159</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.08434162</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  0.11437473</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  0.10627122</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  0.90197449</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 0.42498663</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 0.24376298</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 0.13331653</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 0.07183487</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 0.15601562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 0.42381477</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 0.11191915</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 0.16339097</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 0.22097243</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19 0.29122525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20 0.16117009</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   "ID" "Species" "Name" "DBHclass" "FC"      VCC      VSC      VLE     IAVC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   ID   Species   Name   DBHclass   FC 159.0419 126.4681 1.812554 5.328669</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
