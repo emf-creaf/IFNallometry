@@ -204,7 +204,7 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
 #' @param x Data frame of tree data or \code{forest} object from package medfate.
 #' @param SpParams Data frame of species parameters suitable for medfate package (not used).
 #' @param area Either 'Atlantic' or 'Mediterranean' to specify allometric equations specific to the area (for Pinus pinaster)
-#' @param fraction A string, either "total" (for total biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).
+#' @param fraction A string, either "total" (for total biomass), "stem" (for stem biomass), "branches" (for branch biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).
 #' @param level A string, either "cohort" (for tree cohort-level biomass) or "stand" (for stand-level biomass).
 #'
 #' @returns A vector of biomass of each tree cohort (in Mg/ha of dry weight) to be used in medfate or medfateland packages.
@@ -226,7 +226,7 @@ IFNbiomass_medfate<-function(x, SpParams,
                              fraction = "total",
                              level = "cohort"){
   if(inherits(x, "forest")) x <- x$treeData
-  fraction <- match.arg(fraction, c("total", "aboveground", "belowground"))
+  fraction <- match.arg(fraction, c("total",  "stem", "branches", "aboveground", "belowground"))
   level <- match.arg(level, c("cohort", "stand"))
   ntree <- nrow(x)
   if(ntree>0) {

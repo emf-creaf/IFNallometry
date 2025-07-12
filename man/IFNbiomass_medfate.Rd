@@ -19,7 +19,7 @@ IFNbiomass_medfate(
 
 \item{area}{Either 'Atlantic' or 'Mediterranean' to specify allometric equations specific to the area (for Pinus pinaster)}
 
-\item{fraction}{A string, either "total" (for total biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).}
+\item{fraction}{A string, either "total" (for total biomass), "stem" (for stem biomass), "branches" (for branch biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).}
 
 \item{level}{A string, either "cohort" (for tree cohort-level biomass) or "stand" (for stand-level biomass).}
 }
