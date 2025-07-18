@@ -121,10 +121,10 @@ IFNvolume<-function(x, IFN = c(3,2), FC = 1:6, code_missing = "99",
     if(nchar(taxoni)<=4) taxoni <- as.numeric(taxoni)
     # Translate species names according to IFN
     if(!is.numeric(taxoni)) {
-      if(taxoni %in% species_ifn$Species) {
-        taxoni <- species_ifn$IFNcode[species_ifn$Species == taxoni][1]
-      } else if(any(startsWith(species_ifn$Species,taxoni))) {
-        taxoni <- species_ifn$IFNcode[startsWith(species_ifn$Species,taxoni)][1]
+      if(taxoni %in% IFNallometry::species_ifn$Species) {
+        taxoni <- IFNallometry::species_ifn$IFNcode[IFNallometry::species_ifn$Species == taxoni][1]
+      } else if(any(startsWith(IFNallometry::species_ifn$Species,taxoni))) {
+        taxoni <- IFNallometry::species_ifn$IFNcode[startsWith(IFNallometry::species_ifn$Species,taxoni)][1]
       } else {
         cli::cli_alert_warning(paste0("Species name '", taxoni,"' not found in 'species_ifn'. ", code_missing," code will be used."))
         taxoni <- code_missing

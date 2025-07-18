@@ -77,10 +77,10 @@ IFNbiomass<-function(x, as.CO2 = FALSE, area = NA,
     spu = sp_unique[i]
     sel = (Species==spu)
     if(nchar(spu)>4) {
-      if(spu %in% species_ifn$Species) {
-        spu <- species_ifn$IFNcode[species_ifn$Species == spu][1]
-      } else if(any(startsWith(species_ifn$Species,spu))) {
-        spu <- species_ifn$IFNcode[startsWith(species_ifn$Species,spu)][1]
+      if(spu %in% IFNallometry::species_ifn$Species) {
+        spu <- IFNallometry::species_ifn$IFNcode[IFNallometry::species_ifn$Species == spu][1]
+      } else if(any(startsWith(IFNallometry::species_ifn$Species,spu))) {
+        spu <- IFNallometry::species_ifn$IFNcode[startsWith(IFNallometry::species_ifn$Species,spu)][1]
       } else {
         cli::cli_abort(paste0("Species name '", spu,"' not found in 'species_ifn'."))
       }
