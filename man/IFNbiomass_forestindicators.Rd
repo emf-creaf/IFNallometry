@@ -4,7 +4,13 @@
 \alias{IFNbiomass_forestindicators}
 \title{Wrapper biomass function for package forestindicators}
 \usage{
-IFNbiomass_forestindicators(x, area = NA, fraction = "total", ...)
+IFNbiomass_forestindicators(
+  x,
+  area = NA,
+  fraction = "total",
+  as.CO2 = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{A data frame corresponding to plant_dynamic_input in package forestindicators}
@@ -13,10 +19,13 @@ IFNbiomass_forestindicators(x, area = NA, fraction = "total", ...)
 
 \item{fraction}{A string, either "total" (for total biomass), "stem" (for stem biomass), "branches" (for branch biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).}
 
+\item{as.CO2}{Flag to indicate output as Mg of CO2 / ha instead of Mg of dry weight / ha. Percentage of carbon per dry weight biomass by species are
+taken from Montero et al. (2005) (in turn, from Ibáñez et al. 2002).}
+
 \item{...}{Parameters not used}
 }
 \value{
-A vector of biomass of each tree cohort (in Mg/ha of dry weight)
+A vector of biomass of each tree cohort (in Mg/ha of CO2 or dry weight)
 }
 \description{
 Wrapper biomass function for package forestindicators

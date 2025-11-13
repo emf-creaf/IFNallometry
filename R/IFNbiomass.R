@@ -262,13 +262,16 @@ IFNbiomass_medfate<-function(x, SpParams,
 #' @param x A data frame corresponding to plant_dynamic_input in package forestindicators
 #' @param area Either 'Atlantic' or 'Mediterranean' to specify allometric equations specific to the area (for Pinus pinaster)
 #' @param fraction A string, either "total" (for total biomass), "stem" (for stem biomass), "branches" (for branch biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).
+#' @param as.CO2 Flag to indicate output as Mg of CO2 / ha instead of Mg of dry weight / ha. Percentage of carbon per dry weight biomass by species are
+#'              taken from Montero et al. (2005) (in turn, from Ibáñez et al. 2002).
 #' @param ... Parameters not used
 #'
-#' @returns A vector of biomass of each tree cohort (in Mg/ha of dry weight)
+#' @returns A vector of biomass of each tree cohort (in Mg/ha of CO2 or dry weight)
 #' @export
 IFNbiomass_forestindicators<-function(x,
                                       area = NA,
                                       fraction = "total",
+                                      as.CO2 = FALSE,
                                       ...){
   if(inherits(x, "forest")) x <- x$treeData
   fraction <- match.arg(fraction, c("total",  "stem", "branches", "aboveground", "belowground"))
@@ -276,7 +279,7 @@ IFNbiomass_forestindicators<-function(x,
   if(nrow(x)>0) {
     df_input <- x |>
       dplyr::rename(ID = id_stand, Species = plant_entity, N = n, DBH = dbh, H = h)
-    biomass_df <- IFNallometry::IFNbiomass(df_input, as.CO2 = FALSE, area = area)
+    biomass_df <- IFNallometry::IFNbiomass(df_input, as.CO2 = as.CO2, area = area)
     if(fraction=="total") {
       bio <- biomass_df$Total
     } else if(fraction=="stem") {
