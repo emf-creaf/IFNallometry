@@ -29,5 +29,7 @@ packages
   : Wrapper biomass function for packages medfate and medfateland
 - [`IFNvolume_medfate()`](https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_medfate.md)
   : Wrapper tree volume function for packages medfate and medfateland
+- [`IFNbiomass_forestindicators()`](https://emf-creaf.github.io/IFNallometry/reference/IFNbiomass_forestindicators.md)
+  : Wrapper biomass function for package forestindicators
 - [`IFNvolume_forestindicators()`](https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.md)
   : Wrapper tree volume function for package forestindicators
