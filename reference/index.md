@@ -17,14 +17,8 @@ Main functions to calculate tree biomass and volume
 
 - [`IFNbiomass()`](https://emf-creaf.github.io/IFNallometry/reference/IFNbiomass.md)
   : Biomass allometry models
-- [`IFNbiomass_medfate()`](https://emf-creaf.github.io/IFNallometry/reference/IFNbiomass_medfate.md)
-  : Wrapper biomass function for packages medfate and medfateland
 - [`IFNvolume()`](https://emf-creaf.github.io/IFNallometry/reference/IFNvolume.md)
   : Volume allometry models
-- [`IFNvolume_forestindicators()`](https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_forestindicators.md)
-  : Wrapper tree volume function for package forestindicators
-- [`IFNvolume_medfate()`](https://emf-creaf.github.io/IFNallometry/reference/IFNvolume_medfate.md)
-  : Wrapper tree volume function for packages medfate and medfateland
 
 ## Wrapper functions
 

@@ -66,7 +66,5 @@ if(require("medfate")) {
                      fraction = "aboveground",
                      level = "stand")
 }
-#> Loading required package: medfate
-#> Package 'medfate' [ver. 4.8.5]
 #> [1] 142.1382
 ```

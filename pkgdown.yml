@@ -2,7 +2,7 @@ pandoc: 3.6.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-11-13T11:17Z
+last_built: 2025-11-13T11:19Z
 urls:
   reference: https://emf-creaf.github.io/IFNallometry/reference
   article: https://emf-creaf.github.io/IFNallometry/articles
