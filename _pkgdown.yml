@@ -18,12 +18,13 @@ reference:
 - title: Main functions
   desc:  Main functions to calculate tree biomass and volume
   contents:
-  - starts_with("IFNbiomass")
-  - starts_with("IFNvolume")
+  - IFNbiomass
+  - IFNvolume
 
 - title: Wrapper functions
   desc:  Wrapper functions to calculate tree biomass and volume from other packages
   contents:
   - starts_with("IFNbiomass_medfate")
   - starts_with("IFNvolume_medfate")
+  - starts_with("IFNbiomass_forestindicators")
   - starts_with("IFNvolume_forestindicators")

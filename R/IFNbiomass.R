@@ -236,7 +236,7 @@ IFNbiomass_medfate<-function(x, SpParams,
                     H = x$Height/100, # Height is in cm in medfate
                     N = x$N
     )
-    biomass_df <- IFNallometry::IFNbiomass(y, as.CO2 = FALSE)
+    biomass_df <- IFNallometry::IFNbiomass(y, as.CO2 = FALSE, area = area)
     if(fraction=="total") {
       bio <- biomass_df$Total
     } else if(fraction=="stem") {
@@ -250,6 +250,45 @@ IFNbiomass_medfate<-function(x, SpParams,
       bio <- biomass_df$Total - biomass_df$Aerial
     }
     if(level == "stand") bio <- sum(bio)
+    return(bio/1000) #From kg/ha to Mg/ha
+  }
+  return(numeric(0))
+}
+
+
+
+#' Wrapper biomass function for package forestindicators
+#'
+#' @param x A data frame corresponding to plant_dynamic_input in package forestindicators
+#' @param area Either 'Atlantic' or 'Mediterranean' to specify allometric equations specific to the area (for Pinus pinaster)
+#' @param fraction A string, either "total" (for total biomass), "stem" (for stem biomass), "branches" (for branch biomass), "aboveground" (for aboveground biomass) or "belowground" (for belowground biomass).
+#' @param ... Parameters not used
+#'
+#' @returns A vector of biomass of each tree cohort (in Mg/ha of dry weight)
+#' @export
+IFNbiomass_forestindicators<-function(x,
+                                      area = NA,
+                                      fraction = "total",
+                                      ...){
+  if(inherits(x, "forest")) x <- x$treeData
+  fraction <- match.arg(fraction, c("total",  "stem", "branches", "aboveground", "belowground"))
+
+  if(nrow(x)>0) {
+    df_input <- x |>
+      dplyr::rename(ID = id_stand, Species = plant_entity, N = n, DBH = dbh, H = h)
+    biomass_df <- IFNallometry::IFNbiomass(df_input, as.CO2 = FALSE, area = area)
+    if(fraction=="total") {
+      bio <- biomass_df$Total
+    } else if(fraction=="stem") {
+      bio <- biomass_df$Stem
+    } else if(fraction=="branches") {
+      bio <- biomass_df$Branches
+    } else if(fraction=="aboveground") {
+      bio <- biomass_df$Aerial
+      bio[is.na(bio)] = biomass_df$Stem[is.na(bio)] + biomass_df$Branches[is.na(bio)] # Substitute NA for aboveground by the sum of stem and branches (sometimes leaves are missing)
+    } else if(fraction=="belowground") {
+      bio <- biomass_df$Total - biomass_df$Aerial
+    }
     return(bio/1000) #From kg/ha to Mg/ha
   }
   return(numeric(0))
