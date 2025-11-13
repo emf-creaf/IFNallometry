@@ -3,6 +3,7 @@
 export(IFNbiomass)
 export(IFNbiomass_medfate)
 export(IFNvolume)
+export(IFNvolume_forestindicators)
 export(IFNvolume_medfate)
 importFrom(cli,cli_abort)
 importFrom(cli,cli_alert_warning)

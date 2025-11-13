@@ -26,3 +26,4 @@ reference:
   contents:
   - starts_with("IFNbiomass_medfate")
   - starts_with("IFNvolume_medfate")
+  - starts_with("IFNvolume_forestindicators")

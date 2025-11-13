@@ -232,3 +232,28 @@ IFNvolume_medfate<-function(x, SpParams,
   }
   return(numeric(0))
 }
+
+
+#' Wrapper tree volume function for package forestindicators
+#'
+#' @param x A data frame corresponding to plant_dynamic_input in package forestindicators
+#' @param province A numeric code with Spanish province
+#' @param ... Parameters not used
+#'
+#' @returns A vector of timber volumes per tree cohort (in m3/ha).
+#' @export
+#'
+IFNvolume_forestindicators <- function(x,
+                                       province,
+                                       ...){
+
+  ## Check additional parameters (add as many as additional arguments)
+  if(!inherits(province, "numeric")) cli::cli_abort("'province' should be a numeric value")
+
+  df_input <- x |>
+    dplyr::rename(ID = id_stand, Species = plant_entity, N = n, DBH = dbh, H = h) |>
+    dplyr::mutate(Province = province)
+
+  vol_bark <- IFNallometry::IFNvolume(df_input)
+  return(vol_bark[["VCC"]])
+}
